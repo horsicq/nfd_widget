@@ -107,6 +107,16 @@ void NFD_Widget::stop()
 
 void NFD_Widget::onScanFinished()
 {
+    QAbstractItemModel *pOldModel=ui->treeViewResult->model();
+
+    StaticScanItemModel *pModel=new StaticScanItemModel(&(scanResult.listRecords),this,1);
+    ui->treeViewResult->setModel(pModel);
+    ui->treeViewResult->expandAll();
+
+    delete pOldModel;
+
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(scanResult.nScanTime).arg(tr("msec")));
+
     bProcess=false;
 
     ui->progressBarProgress->setMaximum(100);

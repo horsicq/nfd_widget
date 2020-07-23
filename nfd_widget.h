@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QFutureWatcher>
 #include <QtConcurrent>
-#include "staticscan.h"
+#include "staticscanitemmodel.h"
 
 namespace Ui {
 class NFD_Widget;
