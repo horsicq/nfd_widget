@@ -28,6 +28,8 @@ NFD_Widget::NFD_Widget(QWidget *parent) :
     ui->setupUi(this);
 
     connect(&watcher,SIGNAL(finished()),this,SLOT(onScanFinished()));
+
+    clear();
 }
 
 NFD_Widget::~NFD_Widget()
