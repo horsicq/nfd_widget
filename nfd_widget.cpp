@@ -121,19 +121,7 @@ void NFD_Widget::onScanFinished()
 
     bProcess=false;
 
-    ui->progressBarProgress->setMaximum(100);
-    ui->progressBarProgress->setValue(100);
     ui->pushButtonScan->setText(tr("Scan"));
-}
-
-void NFD_Widget::onProgressMaximumChanged(qint32 nMaximum)
-{
-    ui->progressBarProgress->setMaximum(nMaximum);
-}
-
-void NFD_Widget::onProgressValueChanged(qint32 nValue)
-{
-    ui->progressBarProgress->setValue(nValue);
 }
 
 void NFD_Widget::on_pushButtonExtraInformation_clicked()

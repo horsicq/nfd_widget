@@ -68,8 +68,6 @@ private slots:
     void scan();
     void stop();
     void onScanFinished();
-    void onProgressMaximumChanged(qint32 nMaximum);
-    void onProgressValueChanged(qint32 nValue);
     void on_pushButtonExtraInformation_clicked();
 
 private:
