@@ -12,7 +12,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/nfd_widget.cpp
 
-!contains(XCONFIG, die_script) {
-    XCONFIG += die_script
-    include($$PWD/../die_script/die_script.pri)
+!contains(XCONFIG, staticscan) {
+    XCONFIG += staticscan
+    include($$PWD/../staticscan/staticscan.pri)
 }

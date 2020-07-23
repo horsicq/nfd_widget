@@ -63,8 +63,6 @@ void NFD_Widget::clear()
     scanType=ST_UNKNOWN;
     bProcess=false;
     scanOptions={};
-
-    ui->tableWidgetResult->setRowCount(0);
 }
 
 void NFD_Widget::process()
