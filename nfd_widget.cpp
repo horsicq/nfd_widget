@@ -94,14 +94,15 @@ void NFD_Widget::scan()
     {
         if(scanType==ST_FILE)
         {
-
+            staticScan.setData(sFileName,&scanOptions,&scanResult);
+            staticScan.process();
         }
     }
 }
 
 void NFD_Widget::stop()
 {
-
+    staticScan.stop();
 }
 
 void NFD_Widget::onScanFinished()

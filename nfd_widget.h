@@ -24,6 +24,7 @@
 #include <QWidget>
 #include <QFutureWatcher>
 #include <QtConcurrent>
+#include "staticscan.h"
 
 namespace Ui {
 class NFD_Widget;
@@ -74,9 +75,11 @@ private slots:
 private:
     Ui::NFD_Widget *ui;
     ST scanType;
+    StaticScan staticScan;
+    SpecAbstract::SCAN_OPTIONS scanOptions;
+    SpecAbstract::SCAN_RESULT scanResult;
     QFutureWatcher<void> watcher;
     QString sFileName;
-    OPTIONS scanOptions;
     bool bProcess;
 };
 
