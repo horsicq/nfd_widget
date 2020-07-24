@@ -34,12 +34,20 @@ NFD_Widget::NFD_Widget(QWidget *parent) :
 
 NFD_Widget::~NFD_Widget()
 {
+    if(bProcess)
+    {
+        stop();
+        watcher.waitForFinished();
+    }
+
     delete ui;
 }
 
 void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
 {
+    ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
     ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
+    ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
 }
 
 void NFD_Widget::setData(QString sFileName, bool bScan)
@@ -76,7 +84,9 @@ void NFD_Widget::process()
 
         ui->pushButtonScan->setText(tr("Stop"));
 
+        scanOptions.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         scanOptions.bDeepScan=ui->checkBoxDeepScan->isChecked();
+        scanOptions.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
         //    scanOptions.bDebug=true;
 
         QFuture<void> future=QtConcurrent::run(this,&NFD_Widget::scan);
@@ -110,6 +120,7 @@ void NFD_Widget::stop()
 
 void NFD_Widget::onScanFinished()
 {
+    // TODO Disable controls
     QAbstractItemModel *pOldModel=ui->treeViewResult->model();
 
     StaticScanItemModel *pModel=new StaticScanItemModel(&(scanResult.listRecords),this,1);
@@ -127,5 +138,12 @@ void NFD_Widget::onScanFinished()
 
 void NFD_Widget::on_pushButtonExtraInformation_clicked()
 {
-    // TODO
+    StaticScanItemModel *pModel=static_cast<StaticScanItemModel *>(ui->treeViewResult->model());
+
+    if(pModel)
+    {
+        DialogInfo dialogInfo(this,pModel->toString(&scanOptions));
+
+        dialogInfo.exec();
+    }
 }

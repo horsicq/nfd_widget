@@ -25,6 +25,7 @@
 #include <QFutureWatcher>
 #include <QtConcurrent>
 #include "staticscanitemmodel.h"
+#include "dialoginfo.h"
 
 namespace Ui {
 class NFD_Widget;
@@ -43,7 +44,9 @@ public:
 
     struct OPTIONS
     {
+        bool bRecursiveScan;
         bool bDeepScan;
+        bool bHeuristicScan;
     };
 
     enum COLUMN

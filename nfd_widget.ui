@@ -62,9 +62,23 @@
           </spacer>
          </item>
          <item>
+          <widget class="QCheckBox" name="checkBoxRecursiveScan">
+           <property name="text">
+            <string>Recursive scan</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QCheckBox" name="checkBoxDeepScan">
            <property name="text">
             <string>Deep scan</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBoxHeuristicScan">
+           <property name="text">
+            <string>Heuristic scan</string>
            </property>
           </widget>
          </item>
