@@ -65,6 +65,7 @@ void NFD_Widget::clear()
     scanType=ST_UNKNOWN;
     bProcess=false;
     scanOptions={};
+    scanResult={};
 }
 
 void NFD_Widget::process()
