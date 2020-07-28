@@ -61,7 +61,7 @@ public:
     ~NFD_Widget();
 
     void setOptions(OPTIONS *pOptions);
-    void setData(QString sFileName,bool bScan=false);
+    void setData(QString sFileName,bool bScan=false, XBinary::FT ft=XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
 
 private slots:
@@ -81,6 +81,7 @@ private:
     SpecAbstract::SCAN_RESULT scanResult;
     QFutureWatcher<void> watcher;
     QString sFileName;
+    XBinary::FT ft;
     bool bProcess;
 };
 

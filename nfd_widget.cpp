@@ -50,11 +50,12 @@ void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
     ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
 }
 
-void NFD_Widget::setData(QString sFileName, bool bScan)
+void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT ft)
 {
     clear();
 
     this->sFileName=sFileName;
+    this->ft=ft;
     scanType=ST_FILE;
 
     if(bScan)
@@ -87,6 +88,7 @@ void NFD_Widget::process()
         scanOptions.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         scanOptions.bDeepScan=ui->checkBoxDeepScan->isChecked();
         scanOptions.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
+        scanOptions.fileType=ft;
         //    scanOptions.bDebug=true;
 
         QFuture<void> future=QtConcurrent::run(this,&NFD_Widget::scan);
