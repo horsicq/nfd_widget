@@ -17,7 +17,7 @@ SOURCES += \
     include($$PWD/../staticscan/staticscan.pri)
 }
 
-!contains(XCONFIG, dialoginfo) {
-    XCONFIG += dialoginfo
-    include($$PWD/../FormatDialogs/dialoginfo.pri)
+!contains(XCONFIG, dialogtextinfo) {
+    XCONFIG += dialogtextinfo
+    include($$PWD/../FormatDialogs/dialogtextinfo.pri)
 }

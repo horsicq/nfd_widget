@@ -144,7 +144,7 @@ void NFD_Widget::on_pushButtonExtraInformation_clicked()
 
     if(pModel)
     {
-        DialogInfo dialogInfo(this,pModel->toString(&scanOptions));
+        DialogTextInfo dialogInfo(this,pModel->toString(&scanOptions));
 
         dialogInfo.exec();
     }

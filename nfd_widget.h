@@ -25,7 +25,7 @@
 #include <QFutureWatcher>
 #include <QtConcurrent>
 #include "staticscanitemmodel.h"
-#include "dialoginfo.h"
+#include "dialogtextinfo.h"
 
 namespace Ui {
 class NFD_Widget;
