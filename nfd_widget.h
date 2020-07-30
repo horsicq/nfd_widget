@@ -72,6 +72,7 @@ private slots:
     void stop();
     void onScanFinished();
     void on_pushButtonExtraInformation_clicked();
+    void enableControls(bool bState);
 
 private:
     Ui::NFD_Widget *ui;

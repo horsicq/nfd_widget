@@ -82,6 +82,7 @@ void NFD_Widget::process()
     if(!bProcess)
     {
         bProcess=true;
+        enableControls(false);
 
         ui->pushButtonScan->setText(tr("Stop"));
 
@@ -99,7 +100,8 @@ void NFD_Widget::process()
     {
         stop();
         watcher.waitForFinished();
-        ui->pushButtonScan->setText(tr("Scan"));
+        ui->pushButtonScan->setText(tr("Scan")); // TODO Check
+        enableControls(true);
     }
 }
 
@@ -122,7 +124,8 @@ void NFD_Widget::stop()
 
 void NFD_Widget::onScanFinished()
 {
-    // TODO Disable controls
+    enableControls(true);
+
     QAbstractItemModel *pOldModel=ui->treeViewResult->model();
 
     StaticScanItemModel *pModel=new StaticScanItemModel(&(scanResult.listRecords),this,1);
@@ -148,4 +151,21 @@ void NFD_Widget::on_pushButtonExtraInformation_clicked()
 
         dialogInfo.exec();
     }
+}
+
+void NFD_Widget::enableControls(bool bState)
+{
+    if(!bState)
+    {
+        QAbstractItemModel *pOldModel=ui->treeViewResult->model();
+        ui->treeViewResult->setModel(0);
+        delete pOldModel;
+    }
+
+    ui->treeViewResult->setEnabled(bState);
+    ui->checkBoxDeepScan->setEnabled(bState);
+    ui->checkBoxHeuristicScan->setEnabled(bState);
+    ui->checkBoxRecursiveScan->setEnabled(bState);
+    ui->pushButtonExtraInformation->setEnabled(bState);
+    ui->lineEditElapsedTime->setEnabled(bState);
 }
