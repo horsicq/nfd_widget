@@ -29,10 +29,6 @@ NFD_Widget::NFD_Widget(QWidget *parent) :
 
     connect(&watcher,SIGNAL(finished()),this,SLOT(onScanFinished()));
 
-    ui->checkBoxDeepScan->setChecked(true);
-    ui->checkBoxHeuristicScan->setChecked(true);
-    ui->checkBoxRecursiveScan->setChecked(true);
-
     clear();
 }
 
