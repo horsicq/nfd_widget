@@ -57,7 +57,7 @@ public:
         COLUMN_INFO
     };
 
-    explicit NFD_Widget(QWidget *parent=nullptr);
+    explicit NFD_Widget(QWidget *pParent=nullptr);
     ~NFD_Widget();
 
     void setOptions(OPTIONS *pOptions);

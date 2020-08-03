@@ -21,8 +21,8 @@
 #include "nfd_widget.h"
 #include "ui_nfd_widget.h"
 
-NFD_Widget::NFD_Widget(QWidget *parent) :
-    QWidget(parent),
+NFD_Widget::NFD_Widget(QWidget *pParent) :
+    QWidget(pParent),
     ui(new Ui::NFD_Widget)
 {
     ui->setupUi(this);
