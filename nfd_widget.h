@@ -61,7 +61,7 @@ public:
     ~NFD_Widget();
 
     void setOptions(OPTIONS *pOptions);
-    void setData(QString sFileName,bool bScan=false,XBinary::FT ft=XBinary::FT_UNKNOWN);
+    void setData(QString sFileName,bool bScan=false,XBinary::FT fileType=XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
 
 private slots:

@@ -54,12 +54,12 @@ void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
     ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
 }
 
-void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT ft)
+void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
 {
     clear();
 
     this->sFileName=sFileName;
-    this->ft=ft;
+    this->ft=fileType;
     scanType=ST_FILE;
 
     if(bScan)
