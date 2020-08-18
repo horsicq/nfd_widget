@@ -82,7 +82,7 @@ private:
     SpecAbstract::SCAN_RESULT scanResult;
     QFutureWatcher<void> watcher;
     QString sFileName;
-    XBinary::FT ft;
+    XBinary::FT fileType;
     bool bProcess;
 };
 
