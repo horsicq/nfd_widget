@@ -33,6 +33,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
     ui->checkBoxHeuristicScan->setChecked(true);
     ui->checkBoxRecursiveScan->setChecked(true);
 
+    ui->progressBarScan->hide();
+
     clear();
 }
 
@@ -102,6 +104,7 @@ void NFD_Widget::process()
     }
     else
     {
+        ui->pushButtonScan->setEnabled(false);
         stop();
         watcher.waitForFinished();
         ui->pushButtonScan->setText(tr("Scan")); // TODO Check
@@ -115,8 +118,12 @@ void NFD_Widget::scan()
     {
         if(scanType==ST_FILE)
         {
+            emit scanStarted();
+
             staticScan.setData(sFileName,&scanOptions,&scanResult);
             staticScan.process();
+
+            emit scanFinished();
         }
     }
 }
@@ -142,6 +149,7 @@ void NFD_Widget::onScanFinished()
 
     bProcess=false;
 
+    ui->pushButtonScan->setEnabled(true);
     ui->pushButtonScan->setText(tr("Scan"));
 }
 
@@ -174,4 +182,13 @@ void NFD_Widget::enableControls(bool bState)
     ui->checkBoxRecursiveScan->setEnabled(bState);
     ui->pushButtonExtraInformation->setEnabled(bState);
     ui->lineEditElapsedTime->setEnabled(bState);
+
+    if(bState)
+    {
+        ui->progressBarScan->hide();
+    }
+    else
+    {
+        ui->progressBarScan->show();
+    }
 }

@@ -74,6 +74,10 @@ private slots:
     void on_pushButtonExtraInformation_clicked();
     void enableControls(bool bState);
 
+signals:
+    void scanStarted();
+    void scanFinished();
+
 private:
     Ui::NFD_Widget *ui;
     ST scanType;
