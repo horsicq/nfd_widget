@@ -14,7 +14,7 @@ SOURCES += \
 
 !contains(XCONFIG, staticscan) {
     XCONFIG += staticscan
-    include($$PWD/../staticscan/staticscan.pri)
+    include($$PWD/../StaticScan/staticscan.pri)
 }
 
 !contains(XCONFIG, dialogtextinfo) {
