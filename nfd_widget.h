@@ -65,13 +65,13 @@ public:
     void setDatabase(QString sDatabasePath);
 
 private slots:
-    void on_pushButtonScan_clicked();
+    void on_pushButtonNfdScan_clicked();
     void clear();
     void process();
     void scan();
     void stop();
     void onScanFinished();
-    void on_pushButtonExtraInformation_clicked();
+    void on_pushButtonNfdExtraInformation_clicked();
     void enableControls(bool bState);
 
 signals:

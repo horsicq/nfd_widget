@@ -70,7 +70,7 @@ void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
     }
 }
 
-void NFD_Widget::on_pushButtonScan_clicked()
+void NFD_Widget::on_pushButtonNfdScan_clicked()
 {
     process();
 }
@@ -90,7 +90,7 @@ void NFD_Widget::process()
         bProcess=true;
         enableControls(false);
 
-        ui->pushButtonScan->setText(tr("Stop"));
+        ui->pushButtonNfdScan->setText(tr("Stop"));
 
         scanOptions.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         scanOptions.bDeepScan=ui->checkBoxDeepScan->isChecked();
@@ -104,10 +104,10 @@ void NFD_Widget::process()
     }
     else
     {
-        ui->pushButtonScan->setEnabled(false);
+        ui->pushButtonNfdScan->setEnabled(false);
         stop();
         watcher.waitForFinished();
-        ui->pushButtonScan->setText(tr("Scan")); // TODO Check
+        ui->pushButtonNfdScan->setText(tr("Scan")); // TODO Check
         enableControls(true);
     }
 }
@@ -149,11 +149,11 @@ void NFD_Widget::onScanFinished()
 
     bProcess=false;
 
-    ui->pushButtonScan->setEnabled(true);
-    ui->pushButtonScan->setText(tr("Scan"));
+    ui->pushButtonNfdScan->setEnabled(true);
+    ui->pushButtonNfdScan->setText(tr("Scan"));
 }
 
-void NFD_Widget::on_pushButtonExtraInformation_clicked()
+void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
 {
     StaticScanItemModel *pModel=static_cast<StaticScanItemModel *>(ui->treeViewResult->model());
 
@@ -180,7 +180,7 @@ void NFD_Widget::enableControls(bool bState)
     ui->checkBoxDeepScan->setEnabled(bState);
     ui->checkBoxHeuristicScan->setEnabled(bState);
     ui->checkBoxRecursiveScan->setEnabled(bState);
-    ui->pushButtonExtraInformation->setEnabled(bState);
+    ui->pushButtonNfdExtraInformation->setEnabled(bState);
     ui->lineEditElapsedTime->setEnabled(bState);
 
     if(bState)
