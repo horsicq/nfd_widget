@@ -145,7 +145,7 @@ void NFD_Widget::onScanFinished()
 
     delete pOldModel;
 
-    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(scanResult.nScanTime).arg(tr("msec")));
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime),tr("msec")));
 
     bProcess=false;
 
