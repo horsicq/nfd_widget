@@ -192,3 +192,10 @@ void NFD_Widget::enableControls(bool bState)
         ui->progressBarScan->show();
     }
 }
+
+void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
+{
+    DialogStaticScanDirectory dds(this,QFileInfo(sFileName).absolutePath());
+
+    dds.exec();
+}

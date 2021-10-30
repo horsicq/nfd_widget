@@ -12,9 +12,9 @@ HEADERS += \
 SOURCES += \
     $$PWD/nfd_widget.cpp
 
-!contains(XCONFIG, staticscan) {
-    XCONFIG += staticscan
-    include($$PWD/../StaticScan/staticscan.pri)
+!contains(XCONFIG, formresult) {
+    XCONFIG += formresult
+    include($$PWD/../StaticScan/formresult.pri)
 }
 
 !contains(XCONFIG, dialogtextinfo) {

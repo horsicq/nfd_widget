@@ -26,6 +26,7 @@
 #include <QtConcurrent>
 #include "staticscanitemmodel.h"
 #include "dialogtextinfo.h"
+#include "dialogstaticscandirectory.h"
 
 namespace Ui {
 class NFD_Widget;
@@ -73,6 +74,7 @@ private slots:
     void onScanFinished();
     void on_pushButtonNfdExtraInformation_clicked();
     void enableControls(bool bState);
+    void on_pushButtonNfdDirectoryScan_clicked();
 
 signals:
     void scanStarted();
