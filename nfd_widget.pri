@@ -21,3 +21,6 @@ SOURCES += \
     XCONFIG += dialogtextinfo
     include($$PWD/../FormatDialogs/dialogtextinfo.pri)
 }
+
+DISTFILES += \
+    $$PWD/nfd_widget.cmake
