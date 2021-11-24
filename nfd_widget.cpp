@@ -22,7 +22,7 @@
 #include "ui_nfd_widget.h"
 
 NFD_Widget::NFD_Widget(QWidget *pParent) :
-    QWidget(pParent),
+    XShortcutsWidget(pParent),
     ui(new Ui::NFD_Widget)
 {
     ui->setupUi(this);
@@ -198,4 +198,9 @@ void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
     DialogStaticScanDirectory dds(this,QFileInfo(sFileName).absolutePath());
 
     dds.exec();
+}
+
+void NFD_Widget::registerShortcuts(bool bState)
+{
+    Q_UNUSED(bState)
 }

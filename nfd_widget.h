@@ -27,12 +27,13 @@
 #include "staticscanitemmodel.h"
 #include "dialogtextinfo.h"
 #include "dialogstaticscandirectory.h"
+#include "xshortcutswidget.h"
 
 namespace Ui {
 class NFD_Widget;
 }
 
-class NFD_Widget : public QWidget
+class NFD_Widget : public XShortcutsWidget
 {
     Q_OBJECT
 
@@ -75,6 +76,9 @@ private slots:
     void on_pushButtonNfdExtraInformation_clicked();
     void enableControls(bool bState);
     void on_pushButtonNfdDirectoryScan_clicked();
+
+protected:
+    virtual void registerShortcuts(bool bState);
 
 signals:
     void scanStarted();
