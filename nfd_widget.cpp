@@ -139,7 +139,7 @@ void NFD_Widget::onScanFinished()
 
     QAbstractItemModel *pOldModel=ui->treeViewResult->model();
 
-    StaticScanItemModel *pModel=new StaticScanItemModel(&(scanResult.listRecords),this,1);
+    ScanItemModel *pModel=new ScanItemModel(&(scanResult.listRecords),this,1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
@@ -155,13 +155,13 @@ void NFD_Widget::onScanFinished()
 
 void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
 {
-    StaticScanItemModel *pModel=static_cast<StaticScanItemModel *>(ui->treeViewResult->model());
+    ScanItemModel *pModel=static_cast<ScanItemModel *>(ui->treeViewResult->model());
 
     if(pModel)
     {
         DialogTextInfo dialogInfo(this);
 
-        dialogInfo.setText(pModel->toString(&scanOptions));
+        dialogInfo.setText(pModel->toString(ScanItemModel::FORMATTYPE_TEXT));
 
         dialogInfo.exec();
     }

@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QFutureWatcher>
 #include <QtConcurrent>
-#include "staticscanitemmodel.h"
+#include "scanitemmodel.h"
 #include "dialogtextinfo.h"
 #include "dialogstaticscandirectory.h"
 #include "xshortcutswidget.h"
