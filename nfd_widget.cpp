@@ -139,7 +139,9 @@ void NFD_Widget::onScanFinished()
 
     QAbstractItemModel *pOldModel=ui->treeViewResult->model();
 
-    ScanItemModel *pModel=new ScanItemModel(&(scanResult.listRecords),this,1);
+    QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
+
+    ScanItemModel *pModel=new ScanItemModel(&_listRecords,this,1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
