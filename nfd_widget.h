@@ -21,8 +21,8 @@
 #ifndef NFD_WIDGET_H
 #define NFD_WIDGET_H
 
-#include <QWidget>
 #include <QFutureWatcher>
+#include <QWidget>
 #include <QtConcurrent>
 #include "scanitemmodel.h"
 #include "dialogtextinfo.h"
@@ -86,7 +86,7 @@ signals:
 
 private:
     Ui::NFD_Widget *ui;
-    ST scanType;
+    ST g_scanType;
     StaticScan staticScan;
     SpecAbstract::SCAN_OPTIONS scanOptions;
     SpecAbstract::SCAN_RESULT scanResult;

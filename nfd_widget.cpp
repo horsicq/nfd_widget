@@ -62,7 +62,7 @@ void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
 
     this->sFileName=sFileName;
     this->fileType=fileType;
-    scanType=ST_FILE;
+    g_scanType=ST_FILE;
 
     if(bScan)
     {
@@ -77,7 +77,7 @@ void NFD_Widget::on_pushButtonNfdScan_clicked()
 
 void NFD_Widget::clear()
 {
-    scanType=ST_UNKNOWN;
+    g_scanType=ST_UNKNOWN;
     bProcess=false;
     scanOptions={};
     scanResult={};
@@ -114,9 +114,9 @@ void NFD_Widget::process()
 
 void NFD_Widget::scan()
 {
-    if(scanType!=ST_UNKNOWN)
+    if(g_scanType!=ST_UNKNOWN)
     {
-        if(scanType==ST_FILE)
+        if(g_scanType==ST_FILE)
         {
             emit scanStarted();
 
