@@ -23,4 +23,6 @@ SOURCES += \
 }
 
 DISTFILES += \
+    $$PWD/LICENSE \
+    $$PWD/README.md \
     $$PWD/nfd_widget.cmake
