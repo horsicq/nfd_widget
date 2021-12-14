@@ -49,6 +49,7 @@ public:
         bool bRecursiveScan;
         bool bDeepScan;
         bool bHeuristicScan;
+        bool bAllTypesScan;
     };
 
     enum COLUMN

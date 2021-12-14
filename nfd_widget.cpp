@@ -32,6 +32,7 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
     ui->checkBoxDeepScan->setChecked(true);
     ui->checkBoxHeuristicScan->setChecked(true);
     ui->checkBoxRecursiveScan->setChecked(true);
+    ui->checkBoxAllTypesScan->setChecked(false);
 
     ui->progressBarScan->hide();
 
@@ -54,6 +55,7 @@ void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
     ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
     ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
     ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
+    ui->checkBoxAllTypesScan->setChecked(pOptions->bAllTypesScan);
 }
 
 void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
@@ -95,6 +97,7 @@ void NFD_Widget::process()
         scanOptions.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
         scanOptions.bDeepScan=ui->checkBoxDeepScan->isChecked();
         scanOptions.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
+        scanOptions.bAllTypesScan=ui->checkBoxAllTypesScan->isChecked();
         scanOptions.fileType=fileType;
         //    scanOptions.bDebug=true;
 
