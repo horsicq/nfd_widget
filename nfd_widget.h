@@ -44,13 +44,13 @@ public:
         ST_FILE
     };
 
-    struct OPTIONS
-    {
-        bool bRecursiveScan;
-        bool bDeepScan;
-        bool bHeuristicScan;
-        bool bAllTypesScan;
-    };
+//    struct OPTIONS
+//    {
+//        bool bRecursiveScan;
+//        bool bDeepScan;
+//        bool bHeuristicScan;
+//        bool bAllTypesScan;
+//    };
 
     enum COLUMN
     {
@@ -63,7 +63,7 @@ public:
     explicit NFD_Widget(QWidget *pParent=nullptr);
     ~NFD_Widget();
 
-    void setOptions(OPTIONS *pOptions);
+//    void setOptions(OPTIONS *pOptions);
     void setData(QString sFileName,bool bScan=false,XBinary::FT fileType=XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
 

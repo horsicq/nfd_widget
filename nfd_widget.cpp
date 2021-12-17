@@ -50,13 +50,13 @@ NFD_Widget::~NFD_Widget()
     delete ui;
 }
 
-void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
-{
-    ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
-    ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
-    ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
-    ui->checkBoxAllTypesScan->setChecked(pOptions->bAllTypesScan);
-}
+//void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
+//{
+//    ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
+//    ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
+//    ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
+//    ui->checkBoxAllTypesScan->setChecked(pOptions->bAllTypesScan);
+//}
 
 void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
 {
