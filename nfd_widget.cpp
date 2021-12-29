@@ -72,6 +72,16 @@ void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
     }
 }
 
+void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
+{
+    ui->checkBoxAllTypesScan->setChecked(pXOptions->isAllTypesScan());
+    ui->checkBoxDeepScan->setChecked(pXOptions->isDeepScan());
+    ui->checkBoxRecursiveScan->setChecked(pXOptions->isRecursiveScan());
+    ui->checkBoxHeuristicScan->setChecked(pXOptions->isHeuristicScan());
+
+    XShortcutsWidget::setGlobal(pShortcuts,pXOptions);
+}
+
 void NFD_Widget::on_pushButtonNfdScan_clicked()
 {
     process();
