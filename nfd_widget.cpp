@@ -176,7 +176,7 @@ void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
     {
         DialogTextInfo dialogInfo(this);
 
-        dialogInfo.setText(pModel->toString(ScanItemModel::FORMATTYPE_TEXT));
+        dialogInfo.setText(pModel->toString(XBinary::FORMATTYPE_TEXT));
 
         dialogInfo.exec();
     }
