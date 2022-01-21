@@ -120,7 +120,7 @@ void NFD_Widget::process()
         ui->pushButtonNfdScan->setEnabled(false);
         stop();
         watcher.waitForFinished();
-        ui->pushButtonNfdScan->setText(tr("Scan")); // TODO Check
+        ui->pushButtonNfdScan->setText(tr("Scan"));
         enableControls(true);
     }
 }
