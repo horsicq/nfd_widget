@@ -111,7 +111,11 @@ void NFD_Widget::process()
         scanOptions.fileType=fileType;
         //    scanOptions.bDebug=true;
 
+    #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        QFuture<void> future=QtConcurrent::run(&NFD_Widget::scan,this);
+    #else
         QFuture<void> future=QtConcurrent::run(this,&NFD_Widget::scan);
+    #endif
 
         watcher.setFuture(future);
     }
