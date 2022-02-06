@@ -58,7 +58,7 @@ NFD_Widget::~NFD_Widget()
 //    ui->checkBoxAllTypesScan->setChecked(pOptions->bAllTypesScan);
 //}
 
-void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
+void NFD_Widget::setData(QString sFileName,bool bScan,XBinary::FT fileType)
 {
     clear();
 
