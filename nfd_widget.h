@@ -95,7 +95,8 @@ private:
     QFutureWatcher<void> watcher;
     QString sFileName;
     XBinary::FT fileType;
-    bool bProcess;
+    XBinary::PDSTRUCT g_pdStruct;
+    bool g_bProcess;
 };
 
 #endif // NFD_WIDGET_H

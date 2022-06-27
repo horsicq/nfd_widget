@@ -27,6 +27,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
 {
     ui->setupUi(this);
 
+    g_pdStruct={};
+
     connect(&watcher,SIGNAL(finished()),this,SLOT(onScanFinished()));
 
     ui->checkBoxDeepScan->setChecked(true);
@@ -41,7 +43,7 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
 
 NFD_Widget::~NFD_Widget()
 {
-    if(bProcess)
+    if(g_bProcess)
     {
         stop();
         watcher.waitForFinished();
@@ -90,16 +92,16 @@ void NFD_Widget::on_pushButtonNfdScan_clicked()
 void NFD_Widget::clear()
 {
     g_scanType=ST_UNKNOWN;
-    bProcess=false;
+    g_bProcess=false;
     scanOptions={};
     scanResult={};
 }
 
 void NFD_Widget::process()
 {
-    if(!bProcess)
+    if(!g_bProcess)
     {
-        bProcess=true;
+        g_bProcess=true;
         enableControls(false);
 
         ui->pushButtonNfdScan->setText(tr("Stop"));
@@ -137,7 +139,7 @@ void NFD_Widget::scan()
         {
             emit scanStarted();
 
-            staticScan.setData(sFileName,&scanOptions,&scanResult);
+            staticScan.setData(sFileName,&scanOptions,&scanResult,&g_pdStruct);
             staticScan.process();
 
             emit scanFinished();
@@ -147,7 +149,7 @@ void NFD_Widget::scan()
 
 void NFD_Widget::stop()
 {
-    staticScan.stop();
+    g_pdStruct.bIsStop=true;
 }
 
 void NFD_Widget::onScanFinished()
@@ -166,7 +168,7 @@ void NFD_Widget::onScanFinished()
 
     ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime),tr("msec")));
 
-    bProcess=false;
+    g_bProcess=false;
 
     ui->pushButtonNfdScan->setEnabled(true);
     ui->pushButtonNfdScan->setText(tr("Scan"));
