@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>489</width>
-    <height>143</height>
+    <width>526</width>
+    <height>170</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,6 +46,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
@@ -70,6 +73,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="checkBoxVerbose">
+           <property name="text">
+            <string>Verbose</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -82,13 +92,6 @@
            </property>
           </spacer>
          </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxAllTypesScan">
-           <property name="text">
-            <string>All types</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -97,6 +100,13 @@
           <widget class="QPushButton" name="pushButtonNfdDirectoryScan">
            <property name="text">
             <string>Directory</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBoxAllTypesScan">
+           <property name="text">
+            <string>All types</string>
            </property>
           </widget>
          </item>
