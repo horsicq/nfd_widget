@@ -165,7 +165,7 @@ void NFD_Widget::onScanFinished()
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
-    delete pOldModel;
+    deleteOldAbstractModel(&pOldModel);
 
     ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime),tr("msec")));
 
@@ -195,7 +195,8 @@ void NFD_Widget::enableControls(bool bState)
     {
         QAbstractItemModel *pOldModel=ui->treeViewResult->model();
         ui->treeViewResult->setModel(0);
-        delete pOldModel;
+
+        deleteOldAbstractModel(&pOldModel);
     }
 
     ui->treeViewResult->setEnabled(bState);
