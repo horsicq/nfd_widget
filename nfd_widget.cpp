@@ -29,7 +29,7 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
 
     g_pdStruct={};
 
-    connect(&watcher,SIGNAL(finished()),this,SLOT(onScanFinished()));
+    connect(&watcher,SIGNAL(finished()),this,SLOT(on_scanFinished()));
 
     ui->checkBoxDeepScan->setChecked(true);
     ui->checkBoxHeuristicScan->setChecked(true);
@@ -51,14 +51,6 @@ NFD_Widget::~NFD_Widget()
 
     delete ui;
 }
-
-//void NFD_Widget::setOptions(NFD_Widget::OPTIONS *pOptions)
-//{
-//    ui->checkBoxRecursiveScan->setChecked(pOptions->bRecursiveScan);
-//    ui->checkBoxDeepScan->setChecked(pOptions->bDeepScan);
-//    ui->checkBoxHeuristicScan->setChecked(pOptions->bHeuristicScan);
-//    ui->checkBoxAllTypesScan->setChecked(pOptions->bAllTypesScan);
-//}
 
 void NFD_Widget::setData(QString sFileName,bool bScan,XBinary::FT fileType)
 {
@@ -153,7 +145,7 @@ void NFD_Widget::stop()
     g_pdStruct.bIsStop=true;
 }
 
-void NFD_Widget::onScanFinished()
+void NFD_Widget::on_scanFinished()
 {
     enableControls(true);
 
@@ -161,7 +153,7 @@ void NFD_Widget::onScanFinished()
 
     QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
 
-    ScanItemModel *pModel=new ScanItemModel(&_listRecords,this,1);
+    ScanItemModel *pModel=new ScanItemModel(&_listRecords,1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
@@ -203,6 +195,9 @@ void NFD_Widget::enableControls(bool bState)
     ui->checkBoxDeepScan->setEnabled(bState);
     ui->checkBoxHeuristicScan->setEnabled(bState);
     ui->checkBoxRecursiveScan->setEnabled(bState);
+    ui->checkBoxVerbose->setEnabled(bState);
+    ui->checkBoxAllTypesScan->setEnabled(bState);
+    ui->pushButtonNfdDirectoryScan->setEnabled(bState);
     ui->pushButtonNfdExtraInformation->setEnabled(bState);
     ui->lineEditElapsedTime->setEnabled(bState);
 

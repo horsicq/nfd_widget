@@ -63,7 +63,6 @@ public:
     explicit NFD_Widget(QWidget *pParent=nullptr);
     ~NFD_Widget();
 
-//    void setOptions(OPTIONS *pOptions);
     void setData(QString sFileName,bool bScan=false,XBinary::FT fileType=XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
     void setGlobal(XShortcuts *pShortcuts,XOptions *pXOptions);
@@ -74,7 +73,7 @@ private slots:
     void process();
     void scan();
     void stop();
-    void onScanFinished();
+    void on_scanFinished();
     void on_pushButtonNfdExtraInformation_clicked();
     void enableControls(bool bState);
     void on_pushButtonNfdDirectoryScan_clicked();
