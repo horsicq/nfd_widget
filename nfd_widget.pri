@@ -3,14 +3,14 @@ QT       += concurrent
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
-FORMS += \
-    $$PWD/nfd_widget.ui
-
 HEADERS += \
     $$PWD/nfd_widget.h
 
 SOURCES += \
     $$PWD/nfd_widget.cpp
+
+FORMS += \
+    $$PWD/nfd_widget.ui
 
 !contains(XCONFIG, formresult) {
     XCONFIG += formresult
