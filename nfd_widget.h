@@ -24,48 +24,46 @@
 #include <QFutureWatcher>
 #include <QWidget>
 #include <QtConcurrent>
-#include "scanitemmodel.h"
-#include "dialogtextinfo.h"
+
 #include "dialogstaticscandirectory.h"
+#include "dialogtextinfo.h"
+#include "scanitemmodel.h"
 #include "xshortcutswidget.h"
 
 namespace Ui {
 class NFD_Widget;
 }
 
-class NFD_Widget : public XShortcutsWidget
-{
+class NFD_Widget : public XShortcutsWidget {
     Q_OBJECT
 
 public:
-    enum ST
-    {
-        ST_UNKNOWN=0,
+    enum ST {
+        ST_UNKNOWN = 0,
         ST_FILE
     };
 
-//    struct OPTIONS
-//    {
-//        bool bRecursiveScan;
-//        bool bDeepScan;
-//        bool bHeuristicScan;
-//        bool bAllTypesScan;
-//    };
+    //    struct OPTIONS
+    //    {
+    //        bool bRecursiveScan;
+    //        bool bDeepScan;
+    //        bool bHeuristicScan;
+    //        bool bAllTypesScan;
+    //    };
 
-    enum COLUMN
-    {
-        COLUMN_TYPE=0,
+    enum COLUMN {
+        COLUMN_TYPE = 0,
         COLUMN_STRING,
         COLUMN_SIGNATURE,
         COLUMN_INFO
     };
 
-    explicit NFD_Widget(QWidget *pParent=nullptr);
+    explicit NFD_Widget(QWidget *pParent = nullptr);
     ~NFD_Widget();
 
-    void setData(QString sFileName,bool bScan=false,XBinary::FT fileType=XBinary::FT_UNKNOWN);
+    void setData(QString sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
-    void setGlobal(XShortcuts *pShortcuts,XOptions *pXOptions);
+    void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
 private slots:
     void on_pushButtonNfdScan_clicked();
@@ -98,4 +96,4 @@ private:
     bool g_bProcess;
 };
 
-#endif // NFD_WIDGET_H
+#endif  // NFD_WIDGET_H

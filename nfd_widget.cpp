@@ -19,17 +19,15 @@
  * SOFTWARE.
  */
 #include "nfd_widget.h"
+
 #include "ui_nfd_widget.h"
 
-NFD_Widget::NFD_Widget(QWidget *pParent) :
-    XShortcutsWidget(pParent),
-    ui(new Ui::NFD_Widget)
-{
+NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::NFD_Widget) {
     ui->setupUi(this);
 
-    g_pdStruct={};
+    g_pdStruct = {};
 
-    connect(&watcher,SIGNAL(finished()),this,SLOT(on_scanFinished()));
+    connect(&watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
 
     ui->checkBoxDeepScan->setChecked(true);
     ui->checkBoxHeuristicScan->setChecked(true);
@@ -41,10 +39,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) :
     clear();
 }
 
-NFD_Widget::~NFD_Widget()
-{
-    if(g_bProcess)
-    {
+NFD_Widget::~NFD_Widget() {
+    if (g_bProcess) {
         stop();
         watcher.waitForFinished();
     }
@@ -52,70 +48,61 @@ NFD_Widget::~NFD_Widget()
     delete ui;
 }
 
-void NFD_Widget::setData(QString sFileName,bool bScan,XBinary::FT fileType)
-{
+void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType) {
     clear();
 
-    this->sFileName=sFileName;
-    this->fileType=fileType;
-    g_scanType=ST_FILE;
+    this->sFileName = sFileName;
+    this->fileType = fileType;
+    g_scanType = ST_FILE;
 
-    if(bScan)
-    {
+    if (bScan) {
         process();
     }
 }
 
-void NFD_Widget::setGlobal(XShortcuts *pShortcuts,XOptions *pXOptions)
-{
+void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions) {
     ui->checkBoxAllTypesScan->setChecked(pXOptions->isAllTypesScan());
     ui->checkBoxDeepScan->setChecked(pXOptions->isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(pXOptions->isRecursiveScan());
     ui->checkBoxHeuristicScan->setChecked(pXOptions->isHeuristicScan());
     ui->checkBoxVerbose->setChecked(pXOptions->isVerbose());
 
-    XShortcutsWidget::setGlobal(pShortcuts,pXOptions);
+    XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
-void NFD_Widget::on_pushButtonNfdScan_clicked()
-{
+void NFD_Widget::on_pushButtonNfdScan_clicked() {
     process();
 }
 
-void NFD_Widget::clear()
-{
-    g_scanType=ST_UNKNOWN;
-    g_bProcess=false;
-    scanOptions={};
-    scanResult={};
+void NFD_Widget::clear() {
+    g_scanType = ST_UNKNOWN;
+    g_bProcess = false;
+    scanOptions = {};
+    scanResult = {};
 }
 
-void NFD_Widget::process()
-{
-    if(!g_bProcess)
-    {
-        g_bProcess=true;
+void NFD_Widget::process() {
+    if (!g_bProcess) {
+        g_bProcess = true;
         enableControls(false);
 
         ui->pushButtonNfdScan->setText(tr("Stop"));
 
-        scanOptions.bRecursiveScan=ui->checkBoxRecursiveScan->isChecked();
-        scanOptions.bDeepScan=ui->checkBoxDeepScan->isChecked();
-        scanOptions.bHeuristicScan=ui->checkBoxHeuristicScan->isChecked();
-        scanOptions.bAllTypesScan=ui->checkBoxAllTypesScan->isChecked();
-        scanOptions.fileType=fileType;
+        scanOptions.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        scanOptions.bDeepScan = ui->checkBoxDeepScan->isChecked();
+        scanOptions.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        scanOptions.fileType = fileType;
         //    scanOptions.bDebug=true;
 
-    #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-        QFuture<void> future=QtConcurrent::run(&NFD_Widget::scan,this);
-    #else
-        QFuture<void> future=QtConcurrent::run(this,&NFD_Widget::scan);
-    #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QFuture<void> future = QtConcurrent::run(&NFD_Widget::scan, this);
+#else
+        QFuture<void> future = QtConcurrent::run(this, &NFD_Widget::scan);
+#endif
 
         watcher.setFuture(future);
-    }
-    else
-    {
+    } else {
         ui->pushButtonNfdScan->setEnabled(false);
         stop();
         watcher.waitForFinished();
@@ -124,15 +111,12 @@ void NFD_Widget::process()
     }
 }
 
-void NFD_Widget::scan()
-{
-    if(g_scanType!=ST_UNKNOWN)
-    {
-        if(g_scanType==ST_FILE)
-        {
+void NFD_Widget::scan() {
+    if (g_scanType != ST_UNKNOWN) {
+        if (g_scanType == ST_FILE) {
             emit scanStarted();
 
-            staticScan.setData(sFileName,&scanOptions,&scanResult,&g_pdStruct);
+            staticScan.setData(sFileName, &scanOptions, &scanResult, &g_pdStruct);
             staticScan.process();
 
             emit scanFinished();
@@ -140,39 +124,35 @@ void NFD_Widget::scan()
     }
 }
 
-void NFD_Widget::stop()
-{
-    g_pdStruct.bIsStop=true;
+void NFD_Widget::stop() {
+    g_pdStruct.bIsStop = true;
 }
 
-void NFD_Widget::on_scanFinished()
-{
+void NFD_Widget::on_scanFinished() {
     enableControls(true);
 
-    QAbstractItemModel *pOldModel=ui->treeViewResult->model();
+    QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-    QList<XBinary::SCANSTRUCT> _listRecords=SpecAbstract::convert(&(scanResult.listRecords));
+    QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-    ScanItemModel *pModel=new ScanItemModel(&_listRecords,1);
+    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
     deleteOldAbstractModel(&pOldModel);
 
-    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime),tr("msec")));
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime), tr("msec")));
 
-    g_bProcess=false;
+    g_bProcess = false;
 
     ui->pushButtonNfdScan->setEnabled(true);
     ui->pushButtonNfdScan->setText(tr("Scan"));
 }
 
-void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
-{
-    ScanItemModel *pModel=static_cast<ScanItemModel *>(ui->treeViewResult->model());
+void NFD_Widget::on_pushButtonNfdExtraInformation_clicked() {
+    ScanItemModel *pModel = static_cast<ScanItemModel *>(ui->treeViewResult->model());
 
-    if(pModel)
-    {
+    if (pModel) {
         DialogTextInfo dialogInfo(this);
 
         dialogInfo.setText(pModel->toString(XBinary::FORMATTYPE_TEXT));
@@ -181,11 +161,9 @@ void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
     }
 }
 
-void NFD_Widget::enableControls(bool bState)
-{
-    if(!bState)
-    {
-        QAbstractItemModel *pOldModel=ui->treeViewResult->model();
+void NFD_Widget::enableControls(bool bState) {
+    if (!bState) {
+        QAbstractItemModel *pOldModel = ui->treeViewResult->model();
         ui->treeViewResult->setModel(0);
 
         deleteOldAbstractModel(&pOldModel);
@@ -201,24 +179,19 @@ void NFD_Widget::enableControls(bool bState)
     ui->pushButtonNfdExtraInformation->setEnabled(bState);
     ui->lineEditElapsedTime->setEnabled(bState);
 
-    if(bState)
-    {
+    if (bState) {
         ui->progressBarScan->hide();
-    }
-    else
-    {
+    } else {
         ui->progressBarScan->show();
     }
 }
 
-void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
-{
-    DialogStaticScanDirectory dds(this,QFileInfo(sFileName).absolutePath());
+void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked() {
+    DialogStaticScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
 
     dds.exec();
 }
 
-void NFD_Widget::registerShortcuts(bool bState)
-{
+void NFD_Widget::registerShortcuts(bool bState) {
     Q_UNUSED(bState)
 }
