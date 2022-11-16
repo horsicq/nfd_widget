@@ -22,7 +22,8 @@
 
 #include "ui_nfd_widget.h"
 
-NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::NFD_Widget) {
+NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::NFD_Widget)
+{
     ui->setupUi(this);
 
     g_pdStruct = {};
@@ -39,7 +40,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
     clear();
 }
 
-NFD_Widget::~NFD_Widget() {
+NFD_Widget::~NFD_Widget()
+{
     if (g_bProcess) {
         stop();
         watcher.waitForFinished();
@@ -48,7 +50,8 @@ NFD_Widget::~NFD_Widget() {
     delete ui;
 }
 
-void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType) {
+void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
+{
     clear();
 
     this->sFileName = sFileName;
@@ -60,7 +63,8 @@ void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType) {
     }
 }
 
-void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions) {
+void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
+{
     ui->checkBoxAllTypesScan->setChecked(pXOptions->isAllTypesScan());
     ui->checkBoxDeepScan->setChecked(pXOptions->isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(pXOptions->isRecursiveScan());
@@ -70,18 +74,21 @@ void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions) {
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
-void NFD_Widget::on_pushButtonNfdScan_clicked() {
+void NFD_Widget::on_pushButtonNfdScan_clicked()
+{
     process();
 }
 
-void NFD_Widget::clear() {
+void NFD_Widget::clear()
+{
     g_scanType = ST_UNKNOWN;
     g_bProcess = false;
     scanOptions = {};
     scanResult = {};
 }
 
-void NFD_Widget::process() {
+void NFD_Widget::process()
+{
     if (!g_bProcess) {
         g_bProcess = true;
         enableControls(false);
@@ -111,7 +118,8 @@ void NFD_Widget::process() {
     }
 }
 
-void NFD_Widget::scan() {
+void NFD_Widget::scan()
+{
     if (g_scanType != ST_UNKNOWN) {
         if (g_scanType == ST_FILE) {
             emit scanStarted();
@@ -124,11 +132,13 @@ void NFD_Widget::scan() {
     }
 }
 
-void NFD_Widget::stop() {
+void NFD_Widget::stop()
+{
     g_pdStruct.bIsStop = true;
 }
 
-void NFD_Widget::on_scanFinished() {
+void NFD_Widget::on_scanFinished()
+{
     enableControls(true);
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
@@ -149,7 +159,8 @@ void NFD_Widget::on_scanFinished() {
     ui->pushButtonNfdScan->setText(tr("Scan"));
 }
 
-void NFD_Widget::on_pushButtonNfdExtraInformation_clicked() {
+void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
+{
     ScanItemModel *pModel = static_cast<ScanItemModel *>(ui->treeViewResult->model());
 
     if (pModel) {
@@ -161,7 +172,8 @@ void NFD_Widget::on_pushButtonNfdExtraInformation_clicked() {
     }
 }
 
-void NFD_Widget::enableControls(bool bState) {
+void NFD_Widget::enableControls(bool bState)
+{
     if (!bState) {
         QAbstractItemModel *pOldModel = ui->treeViewResult->model();
         ui->treeViewResult->setModel(0);
@@ -186,12 +198,14 @@ void NFD_Widget::enableControls(bool bState) {
     }
 }
 
-void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked() {
+void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
+{
     DialogStaticScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
 
     dds.exec();
 }
 
-void NFD_Widget::registerShortcuts(bool bState) {
+void NFD_Widget::registerShortcuts(bool bState)
+{
     Q_UNUSED(bState)
 }
