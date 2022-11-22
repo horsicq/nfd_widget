@@ -22,8 +22,7 @@
 
 #include "ui_nfd_widget.h"
 
-NFD_Widget::NFD_Widget(QWidget *pParent)
-    : XShortcutsWidget(pParent), ui(new Ui::NFD_Widget)
+NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::NFD_Widget)
 {
     ui->setupUi(this);
 
