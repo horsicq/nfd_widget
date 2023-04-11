@@ -124,6 +124,8 @@ void NFD_Widget::scan()
         if (g_scanType == ST_FILE) {
             emit scanStarted();
 
+            g_pdStruct = XBinary::createPdStruct();
+
             staticScan.setData(sFileName, &scanOptions, &scanResult, &g_pdStruct);
             staticScan.process();
 
