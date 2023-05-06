@@ -61,7 +61,7 @@ public:
     explicit NFD_Widget(QWidget *pParent = nullptr);
     ~NFD_Widget();
 
-    void setData(QString sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
+    void setData(const QString &sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
     void setDatabase(QString sDatabasePath);
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 

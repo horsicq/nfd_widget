@@ -50,7 +50,7 @@ NFD_Widget::~NFD_Widget()
     delete ui;
 }
 
-void NFD_Widget::setData(QString sFileName, bool bScan, XBinary::FT fileType)
+void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileType)
 {
     clear();
 
