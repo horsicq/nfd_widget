@@ -202,7 +202,7 @@ void NFD_Widget::enableControls(bool bState)
 
 void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
 {
-    DialogStaticScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
+    DialogNFDScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
 
     dds.exec();
 }

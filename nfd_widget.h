@@ -25,7 +25,7 @@
 #include <QWidget>
 #include <QtConcurrent>
 
-#include "dialogstaticscandirectory.h"
+#include "dialognfdscandirectory.h"
 #include "dialogtextinfo.h"
 #include "scanitemmodel.h"
 #include "xshortcutswidget.h"

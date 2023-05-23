@@ -4,22 +4,46 @@ INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
 HEADERS += \
-    $$PWD/nfd_widget.h
+    $$PWD/dialognfdscan.h \
+    $$PWD/dialognfdscandirectory.h \
+    $$PWD/dialognfdscanprocess.h \
+    $$PWD/nfd_widget.h \
+    $$PWD/nfdoptionswidget.h \
+    $$PWD/nfdwidgetadvanced.h
 
 SOURCES += \
-    $$PWD/nfd_widget.cpp
+    $$PWD/dialognfdscan.cpp \
+    $$PWD/dialognfdscandirectory.cpp \
+    $$PWD/dialognfdscanprocess.cpp \
+    $$PWD/nfd_widget.cpp \
+    $$PWD/nfdoptionswidget.cpp \
+    $$PWD/nfdwidgetadvanced.cpp
 
 FORMS += \
-    $$PWD/nfd_widget.ui
+    $$PWD/dialognfdscan.ui \
+    $$PWD/dialognfdscandirectory.ui \
+    $$PWD/nfd_widget.ui \
+    $$PWD/nfdoptionswidget.ui \
+    $$PWD/nfdwidgetadvanced.ui
 
-!contains(XCONFIG, formresult) {
-    XCONFIG += formresult
-    include($$PWD/../StaticScan/formresult.pri)
+!contains(XCONFIG, staticscan) {
+    XCONFIG += staticscan
+    include($$PWD/../SpecAbstract/staticscan.pri)
+}
+
+!contains(XCONFIG, xshortcuts) {
+    XCONFIG += xshortcuts
+    include($$PWD/../XShortcuts/xshortcuts.pri)
 }
 
 !contains(XCONFIG, dialogtextinfo) {
     XCONFIG += dialogtextinfo
     include($$PWD/../FormatDialogs/dialogtextinfo.pri)
+}
+
+!contains(XCONFIG, xdialogprocess) {
+    XCONFIG += xdialogprocess
+    include($$PWD/../FormatDialogs/xdialogprocess.pri)
 }
 
 DISTFILES += \
