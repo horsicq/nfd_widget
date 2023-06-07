@@ -35,7 +35,7 @@ public:
     explicit DialogNFDScan(QWidget *pParent);
     ~DialogNFDScan();
 
-    void setData(QIODevice *pDevice, bool bAuto, XBinary::FT fileType);
+    void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
 
 private slots:
     void on_pushButtonClose_clicked();

@@ -35,7 +35,7 @@ public:
     explicit NFDWidgetAdvanced(QWidget *pParent = nullptr);
     ~NFDWidgetAdvanced();
 
-    void setData(QIODevice *pDevice, bool bAuto, XBinary::FT fileType);
+    void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
     // TODO setFileName
     // TODO Memory scan
 
@@ -43,7 +43,7 @@ private slots:
     void on_pushButtonScan_clicked();
     void on_pushButtonSave_clicked();
     void on_comboBoxType_currentIndexChanged(int nIndex);
-    void scan();
+    void process();
 
 protected:
     virtual void registerShortcuts(bool bState);

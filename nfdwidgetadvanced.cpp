@@ -41,21 +41,21 @@ NFDWidgetAdvanced::~NFDWidgetAdvanced()
     delete ui;
 }
 
-void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bAuto, XBinary::FT fileType)
+void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType)
 {
     this->g_pDevice = pDevice;
     this->g_fileType = fileType;
 
     XFormats::setFileTypeComboBox(fileType, pDevice, ui->comboBoxType);
 
-    if (bAuto) {
-        scan();
+    if (bScan) {
+        process();
     }
 }
 
 void NFDWidgetAdvanced::on_pushButtonScan_clicked()
 {
-    scan();
+    process();
 }
 
 void NFDWidgetAdvanced::registerShortcuts(bool bState)
@@ -78,10 +78,10 @@ void NFDWidgetAdvanced::on_comboBoxType_currentIndexChanged(int nIndex)
 {
     Q_UNUSED(nIndex)
 
-    scan();
+    process();
 }
 
-void NFDWidgetAdvanced::scan()
+void NFDWidgetAdvanced::process()
 {
     SpecAbstract::SCAN_RESULT scanResult = {};
     SpecAbstract::SCAN_OPTIONS options = {};

@@ -34,9 +34,9 @@ DialogNFDScan::~DialogNFDScan()
     delete ui;
 }
 
-void DialogNFDScan::setData(QIODevice *pDevice, bool bAuto, XBinary::FT fileType)
+void DialogNFDScan::setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType)
 {
-    ui->widgetResult->setData(pDevice, bAuto, fileType);
+    ui->widgetResult->setData(pDevice, bScan, fileType);
 }
 
 void DialogNFDScan::on_pushButtonClose_clicked()
