@@ -69,7 +69,7 @@ void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
     ui->checkBoxDeepScan->setChecked(pXOptions->isDeepScan());
     ui->checkBoxRecursiveScan->setChecked(pXOptions->isRecursiveScan());
     ui->checkBoxHeuristicScan->setChecked(pXOptions->isHeuristicScan());
-    ui->checkBoxVerbose->setChecked(pXOptions->isVerbose());
+    ui->checkBoxVerbose->setChecked(pXOptions->isVerboseScan());
 
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
