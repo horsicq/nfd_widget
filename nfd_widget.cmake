@@ -8,10 +8,10 @@ set(NFD_WIDGET_SOURCES
     ${DIALOGTEXTINFO_SOURCES}
     ${XDIALOGPROCESS_SOURCES}
     ${XSHORTCUTS_SOURCES}
-    ${CMAKE_CURRENT_LIST_DIR}/dialogstaticscan.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/dialogstaticscan.ui
-    ${CMAKE_CURRENT_LIST_DIR}/dialogstaticscandirectory.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/dialogstaticscandirectory.ui
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscan.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscan.ui
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscandirectory.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscandirectory.ui
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscanprocess.cpp
     ${CMAKE_CURRENT_LIST_DIR}/nfdwidgetadvanced.cpp
     ${CMAKE_CURRENT_LIST_DIR}/nfdwidgetadvanced.ui
