@@ -59,9 +59,6 @@ DialogNFDScanProcess::~DialogNFDScanProcess()
     g_pThread->quit();
     g_pThread->wait();
 
-    //    g_pThread->deleteLater(); // TODO
-    //    g_pScan->deleteLater(); // TODO
-
     delete g_pThread;
     delete g_pScan;
 }
