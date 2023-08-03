@@ -44,8 +44,8 @@ public:
     static bool saveResult(QWidget *pParent, ScanItemModel *pModel, const QString &sResultFileName);  // TODO move to scanitemmodel.h
 
 signals:
-    void scanFileStarted(QString sFileName);
-    void scanResult(SpecAbstract::SCAN_RESULT scanResult);
+    void scanFileStarted(const QString &sFileName);
+    void scanResult(const SpecAbstract::SCAN_RESULT &scanResult);
 
 private:
     StaticScan *g_pScan;
