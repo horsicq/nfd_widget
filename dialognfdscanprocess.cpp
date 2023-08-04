@@ -68,7 +68,7 @@ bool DialogNFDScanProcess::saveResult(QWidget *pParent, ScanItemModel *pModel, c
     bool bResult = false;
 
     if (pModel) {
-        QString sFilter= QString("%1 (*.txt)").arg(tr("Text documents"));
+        QString sFilter = QString("%1 (*.txt)").arg(tr("Text documents"));
         QString sFileName = QFileDialog::getSaveFileName(pParent, tr("Save result"), sResultFileName, sFilter);
 
         if (!sFileName.isEmpty()) {
