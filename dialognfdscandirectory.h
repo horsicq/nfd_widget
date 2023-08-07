@@ -51,7 +51,7 @@ private slots:
     void on_pushButtonSave_clicked();
 
 signals:
-    void resultSignal(QString sText);
+    void resultSignal(const QString &sText);
 
 private:
     Ui::DialogNFDScanDirectory *ui;
