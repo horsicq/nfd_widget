@@ -62,7 +62,6 @@ public:
     ~NFD_Widget();
 
     void setData(const QString &sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
-    //    void setDatabase(const QString &sDatabasePath);
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
 private slots:
