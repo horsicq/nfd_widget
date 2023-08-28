@@ -83,7 +83,7 @@ void NFD_Widget::clear()
 {
     g_scanType = ST_UNKNOWN;
     g_bProcess = false;
-    scanOptions = {};
+    g_scanOptions = {};
     scanResult = {};
 }
 
@@ -95,11 +95,11 @@ void NFD_Widget::process()
 
         ui->pushButtonNfdScan->setText(tr("Stop"));
 
-        scanOptions.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        scanOptions.bDeepScan = ui->checkBoxDeepScan->isChecked();
-        scanOptions.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
-        scanOptions.fileType = fileType;
+        g_scanOptions.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        g_scanOptions.bDeepScan = ui->checkBoxDeepScan->isChecked();
+        g_scanOptions.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        g_scanOptions.fileType = fileType;
         //    scanOptions.bDebug=true;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -126,7 +126,7 @@ void NFD_Widget::scan()
 
             g_pdStruct = XBinary::createPdStruct();
 
-            g_staticScan.setData(sFileName, &scanOptions, &scanResult, &g_pdStruct);
+            g_staticScan.setData(sFileName, &g_scanOptions, &scanResult, &g_pdStruct);
             g_staticScan.process();
 
             emit scanFinished();
