@@ -84,7 +84,7 @@ void NFD_Widget::clear()
     g_scanType = ST_UNKNOWN;
     g_bProcess = false;
     g_scanOptions = {};
-    scanResult = {};
+    g_scanResult = {};
 }
 
 void NFD_Widget::process()
@@ -126,7 +126,7 @@ void NFD_Widget::scan()
 
             g_pdStruct = XBinary::createPdStruct();
 
-            g_staticScan.setData(sFileName, &g_scanOptions, &scanResult, &g_pdStruct);
+            g_staticScan.setData(sFileName, &g_scanOptions, &g_scanResult, &g_pdStruct);
             g_staticScan.process();
 
             emit scanFinished();
@@ -145,7 +145,7 @@ void NFD_Widget::on_scanFinished()
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-    QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
+    QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(g_scanResult.listRecords));
 
     ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1);
     ui->treeViewResult->setModel(pModel);
@@ -153,7 +153,7 @@ void NFD_Widget::on_scanFinished()
 
     deleteOldAbstractModel(&pOldModel);
 
-    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(scanResult.nScanTime), tr("msec")));
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(g_scanResult.nScanTime), tr("msec")));
 
     g_bProcess = false;
 
