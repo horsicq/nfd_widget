@@ -55,7 +55,7 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
     clear();
 
     this->sFileName = sFileName;
-    this->fileType = fileType;
+    this->g_fileType = fileType;
     g_scanType = ST_FILE;
 
     if (bScan) {
@@ -99,7 +99,7 @@ void NFD_Widget::process()
         g_scanOptions.bDeepScan = ui->checkBoxDeepScan->isChecked();
         g_scanOptions.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
         g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
-        g_scanOptions.fileType = fileType;
+        g_scanOptions.fileType = g_fileType;
         //    scanOptions.bDebug=true;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

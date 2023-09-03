@@ -90,7 +90,7 @@ private:
     SpecAbstract::SCAN_RESULT g_scanResult;
     QFutureWatcher<void> watcher;
     QString sFileName;
-    XBinary::FT fileType;
+    XBinary::FT g_fileType;
     XBinary::PDSTRUCT g_pdStruct;
     bool g_bProcess;
 };
