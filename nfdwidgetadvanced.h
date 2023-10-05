@@ -36,7 +36,7 @@ public:
     ~NFDWidgetAdvanced();
 
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
-    // TODO setFileName
+    void setData(QString sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan);
     // TODO Memory scan
 
 private slots:
@@ -51,6 +51,7 @@ protected:
 private:
     Ui::NFDWidgetAdvanced *ui;
     QIODevice *g_pDevice;
+    QString g_sFileName;
     XBinary::FT g_fileType;
 };
 

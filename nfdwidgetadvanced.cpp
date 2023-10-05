@@ -53,6 +53,24 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
     }
 }
 
+void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan)
+{
+    this->g_sFileName = sFileName;
+    this->g_fileType = options.fileType;
+
+    ui->checkBoxRecursiveScan->setChecked(options.bRecursiveScan);
+    ui->checkBoxDeepScan->setChecked(options.bDeepScan);
+    ui->checkBoxHeuristicScan->setChecked(options.bHeuristicScan);
+    ui->checkBoxVerbose->setChecked(options.bVerbose);
+    ui->checkBoxAllTypesScan->setChecked(options.bAllTypesScan);
+
+    XFormats::setFileTypeComboBox(options.fileType, sFileName, ui->comboBoxType);
+
+    if (bScan) {
+        process();
+    }
+}
+
 void NFDWidgetAdvanced::on_pushButtonScan_clicked()
 {
     process();
@@ -68,7 +86,13 @@ void NFDWidgetAdvanced::on_pushButtonSave_clicked()
     QAbstractItemModel *pModel = ui->treeViewScan->model();
 
     if (pModel) {
-        QString sSaveFileName = XBinary::getResultFileName(g_pDevice, QString("%1.txt").arg(tr("Result")));
+        QString sSaveFileName;
+
+        if (g_pDevice) {
+            sSaveFileName = XBinary::getResultFileName(g_pDevice, QString("%1.txt").arg(tr("Result")));
+        } else {
+            sSaveFileName = XBinary::getResultFileName(g_sFileName, QString("%1.txt").arg(tr("Result")));
+        }
 
         DialogNFDScanProcess::saveResult(this, (ScanItemModel *)pModel, sSaveFileName);
     }
@@ -95,7 +119,12 @@ void NFDWidgetAdvanced::process()
     options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
 
     DialogNFDScanProcess dialogStaticScanProcess(this);
-    dialogStaticScanProcess.setData(g_pDevice, &options, &scanResult);
+    if (g_pDevice) {
+        dialogStaticScanProcess.setData(g_pDevice, &options, &scanResult);
+    } else {
+        dialogStaticScanProcess.setData(g_sFileName, &options, &scanResult);
+    }
+
     dialogStaticScanProcess.showDialogDelay();
 
     QAbstractItemModel *pOldTreeModel = ui->treeViewScan->model();

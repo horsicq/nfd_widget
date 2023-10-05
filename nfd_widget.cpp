@@ -191,6 +191,7 @@ void NFD_Widget::enableControls(bool bState)
     ui->checkBoxAllTypesScan->setEnabled(bState);
     ui->pushButtonNfdDirectoryScan->setEnabled(bState);
     ui->pushButtonNfdExtraInformation->setEnabled(bState);
+    ui->pushButtonNfdInfo->setEnabled(bState);
     ui->lineEditElapsedTime->setEnabled(bState);
 
     if (bState) {
@@ -210,4 +211,13 @@ void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
 void NFD_Widget::registerShortcuts(bool bState)
 {
     Q_UNUSED(bState)
+}
+
+void NFD_Widget::on_pushButtonNfdInfo_clicked()
+{
+    DialogNFDWidgetAdvanced dnwa(this);
+
+    dnwa.setData(sFileName, g_scanOptions, true);
+
+    dnwa.exec();
 }

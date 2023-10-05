@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>235</height>
+    <width>674</width>
+    <height>277</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,6 +51,13 @@
        </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="pushButtonNfdInfo">
+           <property name="text">
+            <string>Info</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QCheckBox" name="checkBoxRecursiveScan">
            <property name="text">

@@ -29,6 +29,7 @@
 #include "dialogtextinfo.h"
 #include "scanitemmodel.h"
 #include "xshortcutswidget.h"
+#include "dialognfdwidgetadvanced.h"
 
 namespace Ui {
 class NFD_Widget;
@@ -74,6 +75,7 @@ private slots:
     void on_pushButtonNfdExtraInformation_clicked();
     void enableControls(bool bState);
     void on_pushButtonNfdDirectoryScan_clicked();
+    void on_pushButtonNfdInfo_clicked();
 
 protected:
     virtual void registerShortcuts(bool bState);
