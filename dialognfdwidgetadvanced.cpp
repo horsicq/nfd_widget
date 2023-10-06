@@ -21,9 +21,7 @@
 #include "dialognfdwidgetadvanced.h"
 #include "ui_dialognfdwidgetadvanced.h"
 
-DialogNFDWidgetAdvanced::DialogNFDWidgetAdvanced(QWidget *pParent) :
-    XShortcutsDialog(pParent),
-    ui(new Ui::DialogNFDWidgetAdvanced)
+DialogNFDWidgetAdvanced::DialogNFDWidgetAdvanced(QWidget *pParent) : XShortcutsDialog(pParent), ui(new Ui::DialogNFDWidgetAdvanced)
 {
     ui->setupUi(this);
 }

@@ -28,8 +28,7 @@ namespace Ui {
 class DialogNFDWidgetAdvanced;
 }
 
-class DialogNFDWidgetAdvanced : public XShortcutsDialog
-{
+class DialogNFDWidgetAdvanced : public XShortcutsDialog {
     Q_OBJECT
 
 public:
@@ -45,4 +44,4 @@ private:
     Ui::DialogNFDWidgetAdvanced *ui;
 };
 
-#endif // DIALOGNFDWIDGETADVANCED_H
+#endif  // DIALOGNFDWIDGETADVANCED_H
