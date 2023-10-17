@@ -19,4 +19,6 @@ set(NFD_WIDGET_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/nfd_widget.ui
     ${CMAKE_CURRENT_LIST_DIR}/nfdoptionswidget.cpp
     ${CMAKE_CURRENT_LIST_DIR}/nfdoptionswidget.ui
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdwidgetadvanced.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/dialognfdwidgetadvanced.ui
 )
