@@ -58,10 +58,10 @@ void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS op
     this->g_sFileName = sFileName;
     this->g_fileType = options.fileType;
 
-    ui->checkBoxRecursiveScan->setChecked(options.bRecursiveScan);
-    ui->checkBoxDeepScan->setChecked(options.bDeepScan);
-    ui->checkBoxHeuristicScan->setChecked(options.bHeuristicScan);
-    ui->checkBoxVerbose->setChecked(options.bVerbose);
+    ui->checkBoxRecursiveScan->setChecked(options.bIsRecursiveScan);
+    ui->checkBoxDeepScan->setChecked(options.bIsDeepScan);
+    ui->checkBoxHeuristicScan->setChecked(options.bIsHeuristicScan);
+    ui->checkBoxVerbose->setChecked(options.bIsVerbose);
     ui->checkBoxAllTypesScan->setChecked(options.bAllTypesScan);
 
     XFormats::setFileTypeComboBox(options.fileType, sFileName, ui->comboBoxType);
@@ -110,10 +110,10 @@ void NFDWidgetAdvanced::process()
     SpecAbstract::SCAN_RESULT scanResult = {};
     SpecAbstract::SCAN_OPTIONS options = {};
 
-    options.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-    options.bDeepScan = ui->checkBoxDeepScan->isChecked();
-    options.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-    options.bVerbose = ui->checkBoxVerbose->isChecked();
+    options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+    options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
+    options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+    options.bIsVerbose = ui->checkBoxVerbose->isChecked();
     options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
     options.bShowDetects = true;
     options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());

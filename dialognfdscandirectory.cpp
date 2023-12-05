@@ -68,10 +68,10 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
         ui->textBrowserResult->clear();
 
         SpecAbstract::SCAN_OPTIONS options = {};
-        options.bRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        options.bDeepScan = ui->checkBoxDeepScan->isChecked();
-        options.bHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        options.bVerbose = ui->checkBoxVerbose->isChecked();
+        options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
+        options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        options.bIsVerbose = ui->checkBoxVerbose->isChecked();
         options.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
         options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         // TODO Filter options
