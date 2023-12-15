@@ -65,11 +65,11 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
 
 void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
 {
-    ui->checkBoxAllTypesScan->setChecked(pXOptions->isAllTypesScan());
-    ui->checkBoxDeepScan->setChecked(pXOptions->isDeepScan());
-    ui->checkBoxRecursiveScan->setChecked(pXOptions->isRecursiveScan());
-    ui->checkBoxHeuristicScan->setChecked(pXOptions->isHeuristicScan());
-    ui->checkBoxVerbose->setChecked(pXOptions->isVerboseScan());
+    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_ALLTYPES).toBool());
+    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_DEEP).toBool());
+    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_RECURSIVE).toBool());
+    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_HEURISTIC).toBool());
+    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_VERBOSE).toBool());
 
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
@@ -102,6 +102,12 @@ void NFD_Widget::process()
         g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         g_scanOptions.fileType = g_fileType;
         //    scanOptions.bDebug=true;
+
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_ALLTYPES, g_scanOptions.bAllTypesScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_DEEP, g_scanOptions.bIsDeepScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_RECURSIVE, g_scanOptions.bIsRecursiveScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_HEURISTIC, g_scanOptions.bIsHeuristicScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_VERBOSE, g_scanOptions.bIsVerbose);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         QFuture<void> future = QtConcurrent::run(&NFD_Widget::scan, this);

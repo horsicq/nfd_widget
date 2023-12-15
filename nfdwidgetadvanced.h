@@ -39,6 +39,9 @@ public:
     void setData(QString sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan);
     // TODO Memory scan
 
+    void adjustView();
+    void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
+
 private slots:
     void on_pushButtonScan_clicked();
     void on_pushButtonSave_clicked();

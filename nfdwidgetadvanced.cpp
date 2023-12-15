@@ -71,6 +71,22 @@ void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS op
     }
 }
 
+void NFDWidgetAdvanced::adjustView()
+{
+
+}
+
+void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
+{
+    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_ALLTYPES).toBool());
+    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_DEEP).toBool());
+    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_RECURSIVE).toBool());
+    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_HEURISTIC).toBool());
+    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_VERBOSE).toBool());
+
+    XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
+}
+
 void NFDWidgetAdvanced::on_pushButtonScan_clicked()
 {
     process();
