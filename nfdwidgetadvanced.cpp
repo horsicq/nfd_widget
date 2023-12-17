@@ -73,7 +73,6 @@ void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS op
 
 void NFDWidgetAdvanced::adjustView()
 {
-
 }
 
 void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
