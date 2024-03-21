@@ -1,4 +1,4 @@
-/* Copyright (c) 2020-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2020-2024 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
     ui->checkBoxRecursiveScan->setChecked(true);
     ui->checkBoxAllTypesScan->setChecked(false);
 
-    ui->progressBarScan->hide();
+    g_pTimer = new QTimer(this);
+    connect(g_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
 
     clear();
 }
@@ -74,11 +75,6 @@ void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
-void NFD_Widget::on_pushButtonNfdScan_clicked()
-{
-    process();
-}
-
 void NFD_Widget::clear()
 {
     g_scanType = ST_UNKNOWN;
@@ -93,7 +89,7 @@ void NFD_Widget::process()
         g_bProcess = true;
         enableControls(false);
 
-        ui->pushButtonNfdScan->setText(tr("Stop"));
+        ui->pushButtonNfdScanStart->setText(tr("Stop"));
 
         g_scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
         g_scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
@@ -109,6 +105,14 @@ void NFD_Widget::process()
         getGlobalOptions()->setValue(XOptions::ID_SCAN_HEURISTIC, g_scanOptions.bIsHeuristicScan);
         getGlobalOptions()->setValue(XOptions::ID_SCAN_VERBOSE, g_scanOptions.bIsVerbose);
 
+        g_pTimer->start(200);  // TODO const
+
+        ui->progressBar0->hide();
+        ui->progressBar1->hide();
+        ui->progressBar2->hide();
+        ui->progressBar3->hide();
+        ui->progressBar4->hide();
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         QFuture<void> future = QtConcurrent::run(&NFD_Widget::scan, this);
 #else
@@ -117,10 +121,10 @@ void NFD_Widget::process()
 
         watcher.setFuture(future);
     } else {
-        ui->pushButtonNfdScan->setEnabled(false);
+        ui->pushButtonNfdScanStart->setEnabled(false);
         stop();
         watcher.waitForFinished();
-        ui->pushButtonNfdScan->setText(tr("Scan"));
+        ui->pushButtonNfdScanStart->setText(tr("Scan"));
         enableControls(true);
     }
 }
@@ -150,11 +154,13 @@ void NFD_Widget::on_scanFinished()
 {
     enableControls(true);
 
+    g_pTimer->stop();
+
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
     QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(g_scanResult.listRecords));
 
-    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1);
+    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1, getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
@@ -164,8 +170,8 @@ void NFD_Widget::on_scanFinished()
 
     g_bProcess = false;
 
-    ui->pushButtonNfdScan->setEnabled(true);
-    ui->pushButtonNfdScan->setText(tr("Scan"));
+    ui->pushButtonNfdScanStart->setEnabled(true);
+    ui->pushButtonNfdScanStart->setText(tr("Scan"));
 }
 
 void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
@@ -202,9 +208,9 @@ void NFD_Widget::enableControls(bool bState)
     ui->lineEditElapsedTime->setEnabled(bState);
 
     if (bState) {
-        ui->progressBarScan->hide();
+        ui->stackedWidgetNfdScan->setCurrentIndex(0);
     } else {
-        ui->progressBarScan->show();
+        ui->stackedWidgetNfdScan->setCurrentIndex(1);
     }
 }
 
@@ -227,4 +233,27 @@ void NFD_Widget::on_pushButtonNfdInfo_clicked()
     dnwa.setData(sFileName, g_scanOptions, true);
 
     dnwa.exec();
+}
+
+void NFD_Widget::on_pushButtonNfdScanStart_clicked()
+{
+    ui->pushButtonNfdScanStart->setEnabled(false);
+    process();
+    ui->pushButtonNfdScanStart->setEnabled(true);
+}
+
+void NFD_Widget::on_pushButtonNfdScanStop_clicked()
+{
+    ui->pushButtonNfdScanStop->setEnabled(false);
+    process();
+    ui->pushButtonNfdScanStop->setEnabled(true);
+}
+
+void NFD_Widget::timerSlot()
+{
+    XFormats::setProgressBar(ui->progressBar0, g_pdStruct._pdRecord[0]);
+    XFormats::setProgressBar(ui->progressBar1, g_pdStruct._pdRecord[1]);
+    XFormats::setProgressBar(ui->progressBar2, g_pdStruct._pdRecord[2]);
+    XFormats::setProgressBar(ui->progressBar3, g_pdStruct._pdRecord[3]);
+    XFormats::setProgressBar(ui->progressBar4, g_pdStruct._pdRecord[4]);
 }

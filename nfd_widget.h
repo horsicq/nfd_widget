@@ -1,4 +1,4 @@
-/* Copyright (c) 2020-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2020-2024 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,6 @@ public:
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
 private slots:
-    void on_pushButtonNfdScan_clicked();
     void clear();
     void process();
     void scan();
@@ -76,6 +75,9 @@ private slots:
     void enableControls(bool bState);
     void on_pushButtonNfdDirectoryScan_clicked();
     void on_pushButtonNfdInfo_clicked();
+    void on_pushButtonNfdScanStart_clicked();
+    void on_pushButtonNfdScanStop_clicked();
+    void timerSlot();
 
 protected:
     virtual void registerShortcuts(bool bState);
@@ -94,6 +96,7 @@ private:
     QString sFileName;
     XBinary::FT g_fileType;
     XBinary::PDSTRUCT g_pdStruct;
+    QTimer *g_pTimer;
     bool g_bProcess;
 };
 

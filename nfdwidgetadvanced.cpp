@@ -1,4 +1,4 @@
-/* Copyright (c) 2020-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2020-2024 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -146,7 +146,7 @@ void NFDWidgetAdvanced::process()
 
     QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1);
+    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1, getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
     ui->treeViewScan->setModel(pModel);
     ui->treeViewScan->expandAll();
 

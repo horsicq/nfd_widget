@@ -1,4 +1,4 @@
-/* Copyright (c) 2018-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2018-2024 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ void DialogNFDScanDirectory::scanResult(SpecAbstract::SCAN_RESULT scanResult)
 
     QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-    ScanItemModel model(&_listRecords);
+    ScanItemModel model(&_listRecords, 1, false); // mb TODO colored output
 
     sResult += model.toString(XBinary::FORMATTYPE_TEXT).toUtf8().data();
 
