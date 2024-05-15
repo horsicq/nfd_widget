@@ -91,7 +91,7 @@ void DialogNFDScanDirectory::scanResult(SpecAbstract::SCAN_RESULT scanResult)
 
     QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
-    ScanItemModel model(&_listRecords, 1, false); // mb TODO colored output
+    ScanItemModel model(&_listRecords, 1, false);  // mb TODO colored output
 
     sResult += model.toString(XBinary::FORMATTYPE_TEXT).toUtf8().data();
 

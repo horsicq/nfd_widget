@@ -46,7 +46,7 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
     this->g_pDevice = pDevice;
     this->g_fileType = fileType;
 
-    XFormats::setFileTypeComboBox(fileType, pDevice, ui->comboBoxType);
+    XFormats::setFileTypeComboBox(fileType, pDevice, ui->comboBoxType, XBinary::TL_OPTION_ALL);
 
     if (bScan) {
         process();
@@ -64,7 +64,7 @@ void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS op
     ui->checkBoxVerbose->setChecked(options.bIsVerbose);
     ui->checkBoxAllTypesScan->setChecked(options.bAllTypesScan);
 
-    XFormats::setFileTypeComboBox(options.fileType, sFileName, ui->comboBoxType);
+    XFormats::setFileTypeComboBox(options.fileType, sFileName, ui->comboBoxType, XBinary::TL_OPTION_ALL);
 
     if (bScan) {
         process();
