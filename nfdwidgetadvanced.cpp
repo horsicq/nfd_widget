@@ -53,7 +53,7 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
     }
 }
 
-void NFDWidgetAdvanced::setData(QString sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan)
+void NFDWidgetAdvanced::setData(const QString &sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan)
 {
     this->g_sFileName = sFileName;
     this->g_fileType = options.fileType;

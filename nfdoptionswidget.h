@@ -21,20 +21,20 @@
 #ifndef NFDOPTIONSWIDGET_H
 #define NFDOPTIONSWIDGET_H
 
-#include <QWidget>
-
-#include "xoptions.h"
+#include "xshortcutswidget.h"
 
 namespace Ui {
 class NFDOptionsWidget;
 }
 
-class NFDOptionsWidget : public QWidget {
+class NFDOptionsWidget : public XShortcutsWidget {
     Q_OBJECT
 
 public:
     explicit NFDOptionsWidget(QWidget *pParent = nullptr);
     ~NFDOptionsWidget();
+
+    virtual void adjustView();
 
     void setOptions(XOptions *pOptions);
 

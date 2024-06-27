@@ -22,7 +22,7 @@
 
 #include "ui_nfdoptionswidget.h"
 
-NFDOptionsWidget::NFDOptionsWidget(QWidget *pParent) : QWidget(pParent), ui(new Ui::NFDOptionsWidget)
+NFDOptionsWidget::NFDOptionsWidget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui::NFDOptionsWidget)
 {
     ui->setupUi(this);
 
@@ -34,6 +34,11 @@ NFDOptionsWidget::NFDOptionsWidget(QWidget *pParent) : QWidget(pParent), ui(new 
 NFDOptionsWidget::~NFDOptionsWidget()
 {
     delete ui;
+}
+
+void NFDOptionsWidget::adjustView()
+{
+    // TODO
 }
 
 void NFDOptionsWidget::setOptions(XOptions *pOptions)

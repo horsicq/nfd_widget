@@ -75,6 +75,10 @@ void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
+void NFD_Widget::adjustView()
+{
+}
+
 void NFD_Widget::clear()
 {
     g_scanType = ST_UNKNOWN;

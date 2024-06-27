@@ -36,10 +36,10 @@ public:
     ~NFDWidgetAdvanced();
 
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
-    void setData(QString sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan);
+    void setData(const QString &sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan);
     // TODO Memory scan
 
-    void adjustView();
+    virtual void adjustView();
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
 private slots:

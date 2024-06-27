@@ -21,6 +21,7 @@
 #ifndef DIALOGNFDSCAN_H
 #define DIALOGNFDSCAN_H
 
+#include "xshortcutsdialog.h"
 #include "dialognfdscanprocess.h"
 #include "xoptions.h"
 
@@ -28,17 +29,22 @@ namespace Ui {
 class DialogNFDScan;
 }
 
-class DialogNFDScan : public QDialog {
+class DialogNFDScan : public XShortcutsDialog {
     Q_OBJECT
 
 public:
     explicit DialogNFDScan(QWidget *pParent);
     ~DialogNFDScan();
 
+    virtual void adjustView() {}
+
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
 
 private slots:
     void on_pushButtonClose_clicked();
+
+protected:
+    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
 
 private:
     Ui::DialogNFDScan *ui;
