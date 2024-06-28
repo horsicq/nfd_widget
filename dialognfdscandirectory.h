@@ -40,7 +40,9 @@ public:
     explicit DialogNFDScanDirectory(QWidget *pParent, const QString &sDirName);
     ~DialogNFDScanDirectory();
 
-    virtual void adjustView() {}
+    virtual void adjustView()
+    {
+    }
 
 private slots:
     void on_pushButtonOpenDirectory_clicked();
@@ -56,7 +58,10 @@ signals:
     void resultSignal(const QString &sText);
 
 protected:
-    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
+    virtual void registerShortcuts(bool bState)
+    {
+        Q_UNUSED(bState)
+    }
 
 private:
     Ui::DialogNFDScanDirectory *ui;

@@ -36,7 +36,9 @@ public:
     explicit DialogNFDScan(QWidget *pParent);
     ~DialogNFDScan();
 
-    virtual void adjustView() {}
+    virtual void adjustView()
+    {
+    }
 
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
 
@@ -44,7 +46,10 @@ private slots:
     void on_pushButtonClose_clicked();
 
 protected:
-    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
+    virtual void registerShortcuts(bool bState)
+    {
+        Q_UNUSED(bState)
+    }
 
 private:
     Ui::DialogNFDScan *ui;

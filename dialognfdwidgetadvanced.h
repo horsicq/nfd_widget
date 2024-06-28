@@ -35,7 +35,9 @@ public:
     explicit DialogNFDWidgetAdvanced(QWidget *pParent = nullptr);
     ~DialogNFDWidgetAdvanced();
 
-    virtual void adjustView() {}
+    virtual void adjustView()
+    {
+    }
 
     void setData(const QString &sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan);
 
@@ -43,7 +45,10 @@ private slots:
     void on_pushButtonClose_clicked();
 
 protected:
-    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
+    virtual void registerShortcuts(bool bState)
+    {
+        Q_UNUSED(bState)
+    }
 
 private:
     Ui::DialogNFDWidgetAdvanced *ui;
