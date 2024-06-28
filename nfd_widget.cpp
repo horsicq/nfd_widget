@@ -232,11 +232,16 @@ void NFD_Widget::registerShortcuts(bool bState)
 
 void NFD_Widget::on_pushButtonNfdInfo_clicked()
 {
-    DialogNFDWidgetAdvanced dnwa(this);
+    if (!g_scanOptions.bHandleInfo) {
+        DialogNFDWidgetAdvanced dnwa(this);
+        dnwa.setGlobal(getShortcuts(), getGlobalOptions());
 
-    dnwa.setData(sFileName, g_scanOptions, true);
+        dnwa.setData(sFileName, g_scanOptions, true);
 
-    dnwa.exec();
+        dnwa.exec();
+    } else {
+        emit showInfo();
+    }
 }
 
 void NFD_Widget::on_pushButtonNfdScanStart_clicked()

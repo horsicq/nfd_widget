@@ -86,6 +86,7 @@ protected:
 signals:
     void scanStarted();
     void scanFinished();
+    void showInfo();
 
 private:
     Ui::NFD_Widget *ui;
