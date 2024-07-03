@@ -136,6 +136,7 @@ void NFDWidgetAdvanced::process()
     options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
 
     DialogNFDScanProcess dialogStaticScanProcess(this);
+    dialogStaticScanProcess.setGlobal(getShortcuts(), getGlobalOptions());
     if (g_pDevice) {
         dialogStaticScanProcess.setData(g_pDevice, &options, &scanResult);
     } else {

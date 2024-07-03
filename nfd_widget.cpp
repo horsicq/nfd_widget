@@ -184,7 +184,7 @@ void NFD_Widget::on_pushButtonNfdExtraInformation_clicked()
 
     if (pModel) {
         DialogTextInfo dialogInfo(this);
-
+        dialogInfo.setGlobal(getShortcuts(), getGlobalOptions());
         dialogInfo.setText(pModel->toString(XBinary::FORMATTYPE_TEXT));
 
         dialogInfo.exec();
@@ -221,7 +221,7 @@ void NFD_Widget::enableControls(bool bState)
 void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
 {
     DialogNFDScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
-
+    dds.setGlobal(getShortcuts(), getGlobalOptions());
     dds.exec();
 }
 
@@ -235,7 +235,6 @@ void NFD_Widget::on_pushButtonNfdInfo_clicked()
     if (!g_scanOptions.bHandleInfo) {
         DialogNFDWidgetAdvanced dnwa(this);
         dnwa.setGlobal(getShortcuts(), getGlobalOptions());
-
         dnwa.setData(sFileName, g_scanOptions, true);
 
         dnwa.exec();
