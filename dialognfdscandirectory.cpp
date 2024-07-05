@@ -22,11 +22,9 @@
 
 #include "ui_dialognfdscandirectory.h"
 
-DialogNFDScanDirectory::DialogNFDScanDirectory(QWidget *pParent, const QString &sDirName) : XShortcutsDialog(pParent), ui(new Ui::DialogNFDScanDirectory)
+DialogNFDScanDirectory::DialogNFDScanDirectory(QWidget *pParent, const QString &sDirName) : XShortcutsDialog(pParent, true), ui(new Ui::DialogNFDScanDirectory)
 {
     ui->setupUi(this);
-
-    setWindowFlags(windowFlags() | Qt::WindowMinMaxButtonsHint);  // Qt::WindowTitleHint
 
     connect(this, SIGNAL(resultSignal(QString)), this, SLOT(appendResult(QString)));
 

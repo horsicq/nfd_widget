@@ -44,6 +44,9 @@ public slots:
     void save();
     void reload();
 
+protected:
+    virtual void registerShortcuts(bool bState) { Q_UNUSED(bState) }
+
 private:
     Ui::NFDOptionsWidget *ui;
     XOptions *g_pOptions;

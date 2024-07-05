@@ -22,7 +22,7 @@
 
 #include "ui_dialognfdscan.h"
 
-DialogNFDScan::DialogNFDScan(QWidget *pParent) : XShortcutsDialog(pParent), ui(new Ui::DialogNFDScan)
+DialogNFDScan::DialogNFDScan(QWidget *pParent) : XShortcutsDialog(pParent, false), ui(new Ui::DialogNFDScan)
 {
     ui->setupUi(this);
 }
