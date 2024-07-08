@@ -40,3 +40,8 @@ void DialogNFDWidgetAdvanced::on_pushButtonClose_clicked()
 {
     this->close();
 }
+
+void DialogNFDWidgetAdvanced::registerShortcuts(bool bState)
+{
+    Q_UNUSED(bState)
+}
