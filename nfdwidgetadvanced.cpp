@@ -53,7 +53,7 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
     }
 }
 
-void NFDWidgetAdvanced::setData(const QString &sFileName, SpecAbstract::SCAN_OPTIONS options, bool bScan)
+void NFDWidgetAdvanced::setData(const QString &sFileName, XBinary::SCAN_OPTIONS options, bool bScan)
 {
     this->g_sFileName = sFileName;
     this->g_fileType = options.fileType;
@@ -124,8 +124,8 @@ void NFDWidgetAdvanced::on_comboBoxType_currentIndexChanged(int nIndex)
 
 void NFDWidgetAdvanced::process()
 {
-    SpecAbstract::SCAN_RESULT scanResult = {};
-    SpecAbstract::SCAN_OPTIONS options = {};
+    XBinary::SCAN_RESULT scanResult = {};
+    XBinary::SCAN_OPTIONS options = {};
 
     options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
     options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
@@ -134,6 +134,7 @@ void NFDWidgetAdvanced::process()
     options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
     options.bShowDetects = true;
     options.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
+    options.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
 
     DialogNFDScanProcess dialogStaticScanProcess(this);
     dialogStaticScanProcess.setGlobal(getShortcuts(), getGlobalOptions());
@@ -147,15 +148,13 @@ void NFDWidgetAdvanced::process()
 
     QAbstractItemModel *pOldTreeModel = ui->treeViewScan->model();
 
-    QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
-
-    ScanItemModel *pModel = new ScanItemModel(&_listRecords, 1, getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
+    ScanItemModel *pModel = new ScanItemModel(&(scanResult.listRecords), 1, getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
     ui->treeViewScan->setModel(pModel);
     ui->treeViewScan->expandAll();
 
     deleteOldAbstractModel(&pOldTreeModel);
 
-    qint32 nNumberOfHeurs = scanResult.listHeurs.count();
+    qint32 nNumberOfHeurs = scanResult.listDebugRecords.count();
 
     QAbstractItemModel *pOldTableModel = ui->tableViewHeur->model();
 
@@ -167,17 +166,15 @@ void NFDWidgetAdvanced::process()
 
     for (qint32 i = 0; i < nNumberOfHeurs; i++) {
         QStandardItem *pItemHeurType = new QStandardItem;
-        pItemHeurType->setText(SpecAbstract::heurTypeIdToString(scanResult.listHeurs.at(i).detectType));
+        pItemHeurType->setText(scanResult.listDebugRecords.at(i).sType);
         pHeurModel->setItem(i, 0, pItemHeurType);
 
         QStandardItem *pItemName = new QStandardItem;
-        pItemName->setText(
-            QString("%1(%2)[%3]")
-                .arg(SpecAbstract::recordNameIdToString(scanResult.listHeurs.at(i).name), scanResult.listHeurs.at(i).sVersion, scanResult.listHeurs.at(i).sInfo));
+        pItemName->setText(scanResult.listDebugRecords.at(i).sName);
         pHeurModel->setItem(i, 1, pItemName);
 
         QStandardItem *pItemValue = new QStandardItem;
-        pItemValue->setText(scanResult.listHeurs.at(i).sValue);
+        pItemValue->setText(scanResult.listDebugRecords.at(i).sValue);
         pHeurModel->setItem(i, 2, pItemValue);
     }
 

@@ -92,8 +92,8 @@ private:
     Ui::NFD_Widget *ui;
     ST g_scanType;
     StaticScan g_staticScan;
-    SpecAbstract::SCAN_OPTIONS g_scanOptions;
-    SpecAbstract::SCAN_RESULT g_scanResult;
+    XBinary::SCAN_OPTIONS g_scanOptions;
+    XBinary::SCAN_RESULT g_scanResult;
     QFutureWatcher<void> watcher;
     QString sFileName;
     XBinary::FT g_fileType;
