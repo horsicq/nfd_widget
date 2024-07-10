@@ -30,22 +30,22 @@ DialogNFDScanProcess::DialogNFDScanProcess(QWidget *pParent) : XDialogProcess(pP
     connect(g_pThread, SIGNAL(started()), g_pScan, SLOT(process()));
     connect(g_pScan, SIGNAL(completed(qint64)), this, SLOT(onCompleted(qint64)));
     connect(g_pScan, SIGNAL(scanFileStarted(QString)), this, SIGNAL(scanFileStarted(QString)), Qt::DirectConnection);
-    connect(g_pScan, SIGNAL(scanResult(XBinary::SCAN_RESULT)), this, SIGNAL(scanResult(XBinary::SCAN_RESULT)), Qt::DirectConnection);
+    connect(g_pScan, SIGNAL(scanResult(XScanEngine::SCAN_RESULT)), this, SIGNAL(scanResult(XScanEngine::SCAN_RESULT)), Qt::DirectConnection);
 }
 
-void DialogNFDScanProcess::setData(const QString &sFileName, XBinary::SCAN_OPTIONS *pOptions, XBinary::SCAN_RESULT *pScanResult)
+void DialogNFDScanProcess::setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult)
 {
     g_pScan->setData(sFileName, pOptions, pScanResult, getPdStruct());
     g_pThread->start();
 }
 
-void DialogNFDScanProcess::setData(QIODevice *pDevice, XBinary::SCAN_OPTIONS *pOptions, XBinary::SCAN_RESULT *pScanResult)
+void DialogNFDScanProcess::setData(QIODevice *pDevice, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult)
 {
     g_pScan->setData(pDevice, pOptions, pScanResult, getPdStruct());
     g_pThread->start();
 }
 
-void DialogNFDScanProcess::setData(const QString &sDirectoryName, XBinary::SCAN_OPTIONS *pOptions)
+void DialogNFDScanProcess::setData(const QString &sDirectoryName, XScanEngine::SCAN_OPTIONS *pOptions)
 {
     g_pScan->setData(sDirectoryName, pOptions, getPdStruct());
     g_pThread->start();

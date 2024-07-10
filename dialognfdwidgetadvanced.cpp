@@ -31,7 +31,7 @@ DialogNFDWidgetAdvanced::~DialogNFDWidgetAdvanced()
     delete ui;
 }
 
-void DialogNFDWidgetAdvanced::setData(const QString &sFileName, XBinary::SCAN_OPTIONS options, bool bScan)
+void DialogNFDWidgetAdvanced::setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan)
 {
     ui->widgetScan->setData(sFileName, options, bScan);
 }

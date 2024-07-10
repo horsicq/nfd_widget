@@ -65,7 +65,7 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
     if (sDirectoryName != "") {
         ui->textBrowserResult->clear();
 
-        XBinary::SCAN_OPTIONS options = {};
+        XScanEngine::SCAN_OPTIONS options = {};
         options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
         options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
         options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
@@ -89,7 +89,7 @@ void DialogNFDScanDirectory::scanResult(SpecAbstract::SCAN_RESULT scanResult)
     QString sResult = QString("%1 %2 %3").arg(QDir().toNativeSeparators(scanResult.sFileName), QString::number(scanResult.nScanTime), tr("msec"));
     sResult += "\r\n";  // TODO Linux
 
-    QList<XBinary::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
+    QList<XScanEngine::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
 
     ScanItemModel model(&_listRecords, 1, false);  // mb TODO colored output
 

@@ -38,14 +38,14 @@ public:
     explicit DialogNFDScanProcess(QWidget *pParent = nullptr);
     ~DialogNFDScanProcess();
 
-    void setData(const QString &sFileName, XBinary::SCAN_OPTIONS *pOptions, XBinary::SCAN_RESULT *pScanResult);
-    void setData(QIODevice *pDevice, XBinary::SCAN_OPTIONS *pOptions, XBinary::SCAN_RESULT *pScanResult);
-    void setData(const QString &sDirectoryName, XBinary::SCAN_OPTIONS *pOptions);
+    void setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult);
+    void setData(QIODevice *pDevice, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult);
+    void setData(const QString &sDirectoryName, XScanEngine::SCAN_OPTIONS *pOptions);
     static bool saveResult(QWidget *pParent, ScanItemModel *pModel, const QString &sResultFileName);  // TODO move to scanitemmodel.h
 
 signals:
     void scanFileStarted(const QString &sFileName);
-    void scanResult(const XBinary::SCAN_RESULT &scanResult);
+    void scanResult(const XScanEngine::SCAN_RESULT &scanResult);
 
 private:
     StaticScan *g_pScan;

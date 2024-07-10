@@ -53,7 +53,7 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
     }
 }
 
-void NFDWidgetAdvanced::setData(const QString &sFileName, XBinary::SCAN_OPTIONS options, bool bScan)
+void NFDWidgetAdvanced::setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan)
 {
     this->g_sFileName = sFileName;
     this->g_fileType = options.fileType;
@@ -124,8 +124,8 @@ void NFDWidgetAdvanced::on_comboBoxType_currentIndexChanged(int nIndex)
 
 void NFDWidgetAdvanced::process()
 {
-    XBinary::SCAN_RESULT scanResult = {};
-    XBinary::SCAN_OPTIONS options = {};
+    XScanEngine::SCAN_RESULT scanResult = {};
+    XScanEngine::SCAN_OPTIONS options = {};
 
     options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
     options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
