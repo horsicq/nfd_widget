@@ -36,9 +36,7 @@ public:
     explicit DialogNFDScan(QWidget *pParent);
     ~DialogNFDScan();
 
-    virtual void adjustView()
-    {
-    }
+    virtual void adjustView();
 
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
 
