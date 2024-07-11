@@ -78,20 +78,18 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
 
         DialogNFDScanProcess ds(this);
         ds.setGlobal(getShortcuts(), getGlobalOptions());
-        connect(&ds, SIGNAL(scanResult(SpecAbstract::SCAN_RESULT)), this, SLOT(scanResult(SpecAbstract::SCAN_RESULT)), Qt::DirectConnection);
+        connect(&ds, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SLOT(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
         ds.setData(sDirectoryName, &options);
         ds.showDialogDelay();
     }
 }
 
-void DialogNFDScanDirectory::scanResult(SpecAbstract::SCAN_RESULT scanResult)
+void DialogNFDScanDirectory::scanResult(XScanEngine::SCAN_RESULT scanResult)
 {
     QString sResult = QString("%1 %2 %3").arg(QDir().toNativeSeparators(scanResult.sFileName), QString::number(scanResult.nScanTime), tr("msec"));
     sResult += "\r\n";  // TODO Linux
 
-    QList<XScanEngine::SCANSTRUCT> _listRecords = SpecAbstract::convert(&(scanResult.listRecords));
-
-    ScanItemModel model(&_listRecords, 1, false);  // mb TODO colored output
+    ScanItemModel model(&(scanResult.listRecords), 1, false);  // mb TODO colored output
 
     sResult += model.toString(XBinary::FORMATTYPE_TEXT).toUtf8().data();
 

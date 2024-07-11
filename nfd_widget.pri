@@ -29,9 +29,9 @@ FORMS += \
     $$PWD/nfdoptionswidget.ui \
     $$PWD/nfdwidgetadvanced.ui
 
-!contains(XCONFIG, staticscan) {
-    XCONFIG += staticscan
-    include($$PWD/../SpecAbstract/staticscan.pri)
+!contains(XCONFIG, specabstract) {
+    XCONFIG += specabstract
+    include($$PWD/../SpecAbstract/specabstract.pri)
 }
 
 !contains(XCONFIG, xshortcuts) {

@@ -22,32 +22,32 @@
 
 DialogNFDScanProcess::DialogNFDScanProcess(QWidget *pParent) : XDialogProcess(pParent)
 {
-    g_pScan = new StaticScan;
+    g_pSpecAbstract = new SpecAbstract;
     g_pThread = new QThread;
 
-    g_pScan->moveToThread(g_pThread);
+    g_pSpecAbstract->moveToThread(g_pThread);
 
-    connect(g_pThread, SIGNAL(started()), g_pScan, SLOT(process()));
-    connect(g_pScan, SIGNAL(completed(qint64)), this, SLOT(onCompleted(qint64)));
-    connect(g_pScan, SIGNAL(scanFileStarted(QString)), this, SIGNAL(scanFileStarted(QString)), Qt::DirectConnection);
-    connect(g_pScan, SIGNAL(scanResult(XScanEngine::SCAN_RESULT)), this, SIGNAL(scanResult(XScanEngine::SCAN_RESULT)), Qt::DirectConnection);
+    connect(g_pThread, SIGNAL(started()), g_pSpecAbstract, SLOT(process()));
+    connect(g_pSpecAbstract, SIGNAL(completed(qint64)), this, SLOT(onCompleted(qint64)));
+    connect(g_pSpecAbstract, SIGNAL(scanFileStarted(QString)), this, SIGNAL(scanFileStarted(QString)), Qt::DirectConnection);
+    connect(g_pSpecAbstract, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
 }
 
 void DialogNFDScanProcess::setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult)
 {
-    g_pScan->setData(sFileName, pOptions, pScanResult, getPdStruct());
+    g_pSpecAbstract->setData(sFileName, pOptions, pScanResult, getPdStruct());
     g_pThread->start();
 }
 
 void DialogNFDScanProcess::setData(QIODevice *pDevice, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult)
 {
-    g_pScan->setData(pDevice, pOptions, pScanResult, getPdStruct());
+    g_pSpecAbstract->setData(pDevice, pOptions, pScanResult, getPdStruct());
     g_pThread->start();
 }
 
 void DialogNFDScanProcess::setData(const QString &sDirectoryName, XScanEngine::SCAN_OPTIONS *pOptions)
 {
-    g_pScan->setData(sDirectoryName, pOptions, getPdStruct());
+    g_pSpecAbstract->setData(sDirectoryName, pOptions, getPdStruct());
     g_pThread->start();
 }
 
@@ -60,7 +60,7 @@ DialogNFDScanProcess::~DialogNFDScanProcess()
     g_pThread->wait();
 
     delete g_pThread;
-    delete g_pScan;
+    delete g_pSpecAbstract;
 }
 
 bool DialogNFDScanProcess::saveResult(QWidget *pParent, ScanItemModel *pModel, const QString &sResultFileName)

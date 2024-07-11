@@ -28,7 +28,7 @@
 #include <QThread>
 
 #include "scanitemmodel.h"
-#include "staticscan.h"
+#include "specabstract.h"
 #include "xdialogprocess.h"
 
 class DialogNFDScanProcess : public XDialogProcess {
@@ -48,7 +48,7 @@ signals:
     void scanResult(const XScanEngine::SCAN_RESULT &scanResult);
 
 private:
-    StaticScan *g_pScan;
+    SpecAbstract *g_pSpecAbstract;
     QThread *g_pThread;
 };
 

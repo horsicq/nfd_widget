@@ -91,7 +91,7 @@ signals:
 private:
     Ui::NFD_Widget *ui;
     ST g_scanType;
-    StaticScan g_staticScan;
+    SpecAbstract g_pSpecAbstract;
     XScanEngine::SCAN_OPTIONS g_scanOptions;
     XScanEngine::SCAN_RESULT g_scanResult;
     QFutureWatcher<void> watcher;
