@@ -40,6 +40,11 @@ DialogNFDScanDirectory::~DialogNFDScanDirectory()
     delete ui;
 }
 
+void DialogNFDScanDirectory::adjustView()
+{
+
+}
+
 void DialogNFDScanDirectory::on_pushButtonOpenDirectory_clicked()
 {
     QString sInitDirectory = ui->lineEditDirectoryName->text();

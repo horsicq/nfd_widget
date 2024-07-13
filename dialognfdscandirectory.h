@@ -40,9 +40,7 @@ public:
     explicit DialogNFDScanDirectory(QWidget *pParent, const QString &sDirName);
     ~DialogNFDScanDirectory();
 
-    virtual void adjustView()
-    {
-    }
+    virtual void adjustView();
 
 private slots:
     void on_pushButtonOpenDirectory_clicked();
