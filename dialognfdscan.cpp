@@ -34,7 +34,6 @@ DialogNFDScan::~DialogNFDScan()
 
 void DialogNFDScan::adjustView()
 {
-
 }
 
 void DialogNFDScan::setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType)
