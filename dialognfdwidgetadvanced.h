@@ -35,9 +35,7 @@ public:
     explicit DialogNFDWidgetAdvanced(QWidget *pParent = nullptr);
     ~DialogNFDWidgetAdvanced();
 
-    virtual void adjustView()
-    {
-    }
+    virtual void adjustView();
 
     void setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan);
 
