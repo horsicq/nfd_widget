@@ -33,6 +33,8 @@ DialogNFDScanDirectory::DialogNFDScanDirectory(QWidget *pParent, const QString &
     if (sDirName != "") {
         ui->lineEditDirectoryName->setText(sDirName);
     }
+
+    g_scanOptions = {};
 }
 
 DialogNFDScanDirectory::~DialogNFDScanDirectory()
@@ -70,21 +72,20 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
     if (sDirectoryName != "") {
         ui->textBrowserResult->clear();
 
-        XScanEngine::SCAN_OPTIONS options = {};
-        options.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        options.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-        options.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        options.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        options.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
-        options.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
-        options.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        g_scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
+        g_scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
+        g_scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
+        g_scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
+        g_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
+        g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         // TODO Filter options
         // |flags|x all|
 
         DialogNFDScanProcess ds(this);
         ds.setGlobal(getShortcuts(), getGlobalOptions());
         connect(&ds, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SLOT(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
-        ds.setData(sDirectoryName, &options);
+        ds.setData(sDirectoryName, &g_scanOptions);
         ds.showDialogDelay();
     }
 }
@@ -94,7 +95,7 @@ void DialogNFDScanDirectory::scanResult(XScanEngine::SCAN_RESULT scanResult)
     QString sResult = QString("%1 %2 %3").arg(QDir().toNativeSeparators(scanResult.sFileName), QString::number(scanResult.nScanTime), tr("msec"));
     sResult += "\r\n";  // TODO Linux
 
-    ScanItemModel model(&(scanResult.listRecords), 1, false);  // mb TODO colored output
+    ScanItemModel model(&g_scanOptions, &(scanResult.listRecords), 1);
 
     sResult += model.toString(XBinary::FORMATTYPE_TEXT).toUtf8().data();
 

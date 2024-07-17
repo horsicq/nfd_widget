@@ -102,6 +102,7 @@ void NFD_Widget::process()
         g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         g_scanOptions.fileType = g_fileType;
         g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        g_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
         //    scanOptions.bDebug=true;
 
         getGlobalOptions()->setValue(XOptions::ID_SCAN_ALLTYPES, g_scanOptions.bAllTypesScan);
@@ -163,7 +164,7 @@ void NFD_Widget::on_scanFinished()
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-    ScanItemModel *pModel = new ScanItemModel(&(g_scanResult.listRecords), 1, getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool());
+    ScanItemModel *pModel = new ScanItemModel(&g_scanOptions, &(g_scanResult.listRecords), 1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 

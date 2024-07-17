@@ -63,6 +63,7 @@ protected:
 
 private:
     Ui::DialogNFDScanDirectory *ui;
+    XScanEngine::SCAN_OPTIONS g_scanOptions;
 };
 
 #endif  // DIALOGNFDSCANDIRECTORY_H
