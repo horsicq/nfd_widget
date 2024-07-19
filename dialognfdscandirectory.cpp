@@ -134,3 +134,8 @@ void DialogNFDScanDirectory::on_pushButtonSave_clicked()
         }
     }
 }
+
+void DialogNFDScanDirectory::registerShortcuts(bool bState)
+{
+     Q_UNUSED(bState)
+}
