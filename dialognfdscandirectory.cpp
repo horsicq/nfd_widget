@@ -44,7 +44,6 @@ DialogNFDScanDirectory::~DialogNFDScanDirectory()
 
 void DialogNFDScanDirectory::adjustView()
 {
-
 }
 
 void DialogNFDScanDirectory::on_pushButtonOpenDirectory_clicked()
@@ -137,5 +136,5 @@ void DialogNFDScanDirectory::on_pushButtonSave_clicked()
 
 void DialogNFDScanDirectory::registerShortcuts(bool bState)
 {
-     Q_UNUSED(bState)
+    Q_UNUSED(bState)
 }
