@@ -45,3 +45,8 @@ void DialogNFDScan::on_pushButtonClose_clicked()
 {
     this->close();
 }
+
+void DialogNFDScan::registerShortcuts(bool bState)
+{
+    Q_UNUSED(bState)
+}
