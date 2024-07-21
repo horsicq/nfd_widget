@@ -83,3 +83,8 @@ void NFDOptionsWidget::reload()
     g_pOptions->setCheckBox(ui->checkBoxHighlight, XOptions::ID_SCAN_HIGHLIGHT);
     g_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_SCAN_BUFFERSIZE);
 }
+
+void NFDOptionsWidget::registerShortcuts(bool bState)
+{
+    Q_UNUSED(bState)
+}
