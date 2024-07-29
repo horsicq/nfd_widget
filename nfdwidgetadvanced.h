@@ -36,7 +36,7 @@ public:
     ~NFDWidgetAdvanced();
 
     void setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType);
-    void setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan);
+    void setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan);
     // TODO Memory scan
 
     virtual void adjustView();

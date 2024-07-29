@@ -37,7 +37,7 @@ public:
 
     virtual void adjustView();
 
-    void setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan);
+    void setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan);
 
 private slots:
     void on_pushButtonClose_clicked();

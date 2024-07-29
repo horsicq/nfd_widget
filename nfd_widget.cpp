@@ -66,11 +66,11 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
 
 void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
 {
-    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_ALLTYPES).toBool());
-    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_DEEP).toBool());
-    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_RECURSIVE).toBool());
-    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_HEURISTIC).toBool());
-    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_VERBOSE).toBool());
+    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_ALLTYPES).toBool());
+    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_DEEP).toBool());
+    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_RECURSIVE).toBool());
+    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_HEURISTIC).toBool());
+    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_VERBOSE).toBool());
 
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
@@ -99,17 +99,17 @@ void NFD_Widget::process()
         g_scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
         g_scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
         g_scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        g_scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         g_scanOptions.fileType = g_fileType;
         g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         g_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
         //    scanOptions.bDebug=true;
 
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_ALLTYPES, g_scanOptions.bAllTypesScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_DEEP, g_scanOptions.bIsDeepScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_RECURSIVE, g_scanOptions.bIsRecursiveScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_HEURISTIC, g_scanOptions.bIsHeuristicScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_VERBOSE, g_scanOptions.bIsVerbose);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_ALLTYPES, g_scanOptions.bIsAllTypesScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_DEEP, g_scanOptions.bIsDeepScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_RECURSIVE, g_scanOptions.bIsRecursiveScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_HEURISTIC, g_scanOptions.bIsHeuristicScan);
+        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_VERBOSE, g_scanOptions.bIsVerbose);
 
         g_pTimer->start(200);  // TODO const
 

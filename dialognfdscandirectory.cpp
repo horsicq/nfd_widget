@@ -76,7 +76,7 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
         g_scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
         g_scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
         g_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
-        g_scanOptions.bAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        g_scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         // TODO Filter options
         // |flags|x all|

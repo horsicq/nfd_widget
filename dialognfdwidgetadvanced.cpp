@@ -35,9 +35,9 @@ void DialogNFDWidgetAdvanced::adjustView()
 {
 }
 
-void DialogNFDWidgetAdvanced::setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS options, bool bScan)
+void DialogNFDWidgetAdvanced::setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan)
 {
-    ui->widgetScan->setData(sFileName, options, bScan);
+    ui->widgetScan->setData(sFileName, scanOptions, bScan);
 }
 
 void DialogNFDWidgetAdvanced::on_pushButtonClose_clicked()
