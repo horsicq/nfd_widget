@@ -4,12 +4,14 @@ include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/dialogtextinfo.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/xdialogprocess.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../XShortcuts/xshortcuts.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../SpecAbstract/specabstract.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../Controls/xcomboboxex.cmake)
 
 set(NFD_WIDGET_SOURCES
     ${DIALOGTEXTINFO_SOURCES}
     ${XDIALOGPROCESS_SOURCES}
     ${XSHORTCUTS_SOURCES}
     ${SPECABSTRACT_SOURCES}
+    ${XCOMBOBOXEX_SOURCES}
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscan.cpp
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscan.h
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscan.ui

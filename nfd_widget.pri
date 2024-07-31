@@ -49,6 +49,11 @@ FORMS += \
     include($$PWD/../FormatDialogs/xdialogprocess.pri)
 }
 
+!contains(XCONFIG, xcomboboxex) {
+    XCONFIG += xcomboboxex
+    include(../../_mylibs/Controls/xcomboboxex.pri)
+}
+
 DISTFILES += \
     $$PWD/LICENSE \
     $$PWD/README.md \
