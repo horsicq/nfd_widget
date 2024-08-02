@@ -75,16 +75,16 @@ void NFDWidgetAdvanced::adjustView()
 {
     getGlobalOptions()->adjustTreeView(ui->treeViewScan, XOptions::ID_VIEW_FONT_TREEVIEWS);
     getGlobalOptions()->adjustTableView(ui->tableViewHeur, XOptions::ID_VIEW_FONT_TABLEVIEWS);
+
+    ui->checkBoxAllTypesScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_ALLTYPES).toBool());
+    ui->checkBoxDeepScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_DEEP).toBool());
+    ui->checkBoxRecursiveScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_RECURSIVE).toBool());
+    ui->checkBoxHeuristicScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_HEURISTIC).toBool());
+    ui->checkBoxVerbose->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_VERBOSE).toBool());
 }
 
 void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
 {
-    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_ALLTYPES).toBool());
-    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_DEEP).toBool());
-    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_RECURSIVE).toBool());
-    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_HEURISTIC).toBool());
-    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_VERBOSE).toBool());
-
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 

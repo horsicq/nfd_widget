@@ -31,6 +31,12 @@ DialogNFDWidgetAdvanced::~DialogNFDWidgetAdvanced()
     delete ui;
 }
 
+void DialogNFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
+{
+    XShortcutsDialog::setGlobal(pShortcuts, pXOptions);
+    ui->widgetScan->setGlobal(pShortcuts, pXOptions);
+}
+
 void DialogNFDWidgetAdvanced::adjustView()
 {
 }

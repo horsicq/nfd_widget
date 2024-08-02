@@ -35,6 +35,8 @@ public:
     explicit DialogNFDWidgetAdvanced(QWidget *pParent = nullptr);
     ~DialogNFDWidgetAdvanced();
 
+    void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
+
     virtual void adjustView();
 
     void setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan);

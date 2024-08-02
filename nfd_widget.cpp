@@ -30,13 +30,10 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 
     connect(&watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
 
-    ui->checkBoxDeepScan->setChecked(true);
-    ui->checkBoxHeuristicScan->setChecked(true);
-    ui->checkBoxRecursiveScan->setChecked(true);
-    ui->checkBoxAllTypesScan->setChecked(false);
-
     g_pTimer = new QTimer(this);
     connect(g_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+
+    ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 
     clear();
 }
@@ -66,17 +63,13 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
 
 void NFD_Widget::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
 {
-    ui->checkBoxAllTypesScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_ALLTYPES).toBool());
-    ui->checkBoxDeepScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_DEEP).toBool());
-    ui->checkBoxRecursiveScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_RECURSIVE).toBool());
-    ui->checkBoxHeuristicScan->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_HEURISTIC).toBool());
-    ui->checkBoxVerbose->setChecked(pXOptions->getValue(XOptions::ID_SCAN_FLAG_VERBOSE).toBool());
-
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
 void NFD_Widget::adjustView()
 {
+    quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(getGlobalOptions());
+    ui->comboBoxFlags->setValue(nFlags);
 }
 
 void NFD_Widget::clear()
@@ -95,21 +88,18 @@ void NFD_Widget::process()
 
         ui->pushButtonNfdScanStart->setText(tr("Stop"));
 
-        g_scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        g_scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-        g_scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        g_scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
-        g_scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
+        g_scanOptions.bShowType = true;
+        g_scanOptions.bShowVersion = true;
+        g_scanOptions.bShowInfo = true;
         g_scanOptions.fileType = g_fileType;
         g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
         g_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
         //    scanOptions.bDebug=true;
 
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_ALLTYPES, g_scanOptions.bIsAllTypesScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_DEEP, g_scanOptions.bIsDeepScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_RECURSIVE, g_scanOptions.bIsRecursiveScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_HEURISTIC, g_scanOptions.bIsHeuristicScan);
-        getGlobalOptions()->setValue(XOptions::ID_SCAN_FLAG_VERBOSE, g_scanOptions.bIsVerbose);
+        quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
+        XScanEngine::setScanFlags(&g_scanOptions, nFlags);
+
+        XScanEngine::setScanFlagsToGlobalOptions(getGlobalOptions(), nFlags);
 
         g_pTimer->start(200);  // TODO const
 
@@ -201,11 +191,7 @@ void NFD_Widget::enableControls(bool bState)
     }
 
     ui->treeViewResult->setEnabled(bState);
-    ui->checkBoxDeepScan->setEnabled(bState);
-    ui->checkBoxHeuristicScan->setEnabled(bState);
-    ui->checkBoxRecursiveScan->setEnabled(bState);
-    ui->checkBoxVerbose->setEnabled(bState);
-    ui->checkBoxAllTypesScan->setEnabled(bState);
+    ui->comboBoxFlags->setEnabled(bState);
     ui->pushButtonNfdDirectoryScan->setEnabled(bState);
     ui->pushButtonNfdExtraInformation->setEnabled(bState);
     ui->pushButtonNfdInfo->setEnabled(bState);
