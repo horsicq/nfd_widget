@@ -35,6 +35,8 @@ DialogNFDScanDirectory::DialogNFDScanDirectory(QWidget *pParent, const QString &
     }
 
     g_scanOptions = {};
+
+    ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 }
 
 DialogNFDScanDirectory::~DialogNFDScanDirectory()
@@ -44,6 +46,8 @@ DialogNFDScanDirectory::~DialogNFDScanDirectory()
 
 void DialogNFDScanDirectory::adjustView()
 {
+    quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(getGlobalOptions());
+    ui->comboBoxFlags->setValue(nFlags);
 }
 
 void DialogNFDScanDirectory::on_pushButtonOpenDirectory_clicked()
@@ -71,13 +75,16 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
     if (sDirectoryName != "") {
         ui->textBrowserResult->clear();
 
-        g_scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-        g_scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-        g_scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-        g_scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
+        g_scanOptions.bShowType = true;
+        g_scanOptions.bShowVersion = true;
+        g_scanOptions.bShowInfo = true;
         g_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
-        g_scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
         g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+
+        quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
+        XScanEngine::setScanFlags(&g_scanOptions, nFlags);
+
+        XScanEngine::setScanFlagsToGlobalOptions(getGlobalOptions(), nFlags);
         // TODO Filter options
         // |flags|x all|
 
