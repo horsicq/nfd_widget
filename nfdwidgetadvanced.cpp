@@ -29,11 +29,7 @@ NFDWidgetAdvanced::NFDWidgetAdvanced(QWidget *pParent) : XShortcutsWidget(pParen
     this->g_pDevice = nullptr;
     this->g_fileType = XBinary::FT_UNKNOWN;
 
-    ui->checkBoxDeepScan->setChecked(true);
-    ui->checkBoxRecursiveScan->setChecked(true);
-    ui->checkBoxHeuristicScan->setChecked(false);
-    ui->checkBoxVerbose->setChecked(false);
-    ui->checkBoxAllTypesScan->setChecked(false);
+    ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 }
 
 NFDWidgetAdvanced::~NFDWidgetAdvanced()
@@ -58,12 +54,6 @@ void NFDWidgetAdvanced::setData(const QString &sFileName, const XScanEngine::SCA
     this->g_sFileName = sFileName;
     this->g_fileType = scanOptions.fileType;
 
-    ui->checkBoxRecursiveScan->setChecked(scanOptions.bIsRecursiveScan);
-    ui->checkBoxDeepScan->setChecked(scanOptions.bIsDeepScan);
-    ui->checkBoxHeuristicScan->setChecked(scanOptions.bIsHeuristicScan);
-    ui->checkBoxVerbose->setChecked(scanOptions.bIsVerbose);
-    ui->checkBoxAllTypesScan->setChecked(scanOptions.bIsAllTypesScan);
-
     XFormats::setFileTypeComboBox(scanOptions.fileType, sFileName, ui->comboBoxType, XBinary::TL_OPTION_ALL);
 
     if (bScan) {
@@ -76,11 +66,8 @@ void NFDWidgetAdvanced::adjustView()
     getGlobalOptions()->adjustTreeView(ui->treeViewScan, XOptions::ID_VIEW_FONT_TREEVIEWS);
     getGlobalOptions()->adjustTableView(ui->tableViewHeur, XOptions::ID_VIEW_FONT_TABLEVIEWS);
 
-    ui->checkBoxAllTypesScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_ALLTYPES).toBool());
-    ui->checkBoxDeepScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_DEEP).toBool());
-    ui->checkBoxRecursiveScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_RECURSIVE).toBool());
-    ui->checkBoxHeuristicScan->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_HEURISTIC).toBool());
-    ui->checkBoxVerbose->setChecked(getGlobalOptions()->getValue(XOptions::ID_SCAN_FLAG_VERBOSE).toBool());
+    quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(getGlobalOptions());
+    ui->comboBoxFlags->setValue(nFlags);
 }
 
 void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
@@ -130,15 +117,13 @@ void NFDWidgetAdvanced::process()
     scanOptions.bShowType = true;
     scanOptions.bShowVersion = true;
     scanOptions.bShowInfo = true;
-    scanOptions.bIsRecursiveScan = ui->checkBoxRecursiveScan->isChecked();
-    scanOptions.bIsDeepScan = ui->checkBoxDeepScan->isChecked();
-    scanOptions.bIsHeuristicScan = ui->checkBoxHeuristicScan->isChecked();
-    scanOptions.bIsVerbose = ui->checkBoxVerbose->isChecked();
-    scanOptions.bIsAllTypesScan = ui->checkBoxAllTypesScan->isChecked();
     scanOptions.bShowInternalDetects = true;
     scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
     scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
     scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
+
+    quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
+    XScanEngine::setScanFlags(&scanOptions, nFlags);
 
     DialogNFDScanProcess dialogStaticScanProcess(this);
     dialogStaticScanProcess.setGlobal(getShortcuts(), getGlobalOptions());
