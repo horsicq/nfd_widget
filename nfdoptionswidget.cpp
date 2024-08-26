@@ -69,6 +69,7 @@ void NFDOptionsWidget::setDefaultValues(XOptions *pOptions)
     pOptions->addID(XOptions::ID_SCAN_FLAG_VERBOSE, false);
     pOptions->addID(XOptions::ID_SCAN_FLAG_ALLTYPES, false);
     pOptions->addID(XOptions::ID_SCAN_HIGHLIGHT, true);
+    pOptions->addID(XOptions::ID_SCAN_SORT, true);
     pOptions->addID(XOptions::ID_SCAN_BUFFERSIZE, 2 * 1024 * 1024);
 }
 

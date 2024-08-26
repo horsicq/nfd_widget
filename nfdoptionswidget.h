@@ -27,6 +27,7 @@ namespace Ui {
 class NFDOptionsWidget;
 }
 
+// TOIDO remove, use ScanOptionsWidget
 class NFDOptionsWidget : public XShortcutsWidget {
     Q_OBJECT
 
@@ -37,7 +38,6 @@ public:
     virtual void adjustView();
 
     void setOptions(XOptions *pOptions);
-
     static void setDefaultValues(XOptions *pOptions);
 
 public slots:
