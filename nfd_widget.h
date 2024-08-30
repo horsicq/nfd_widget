@@ -86,6 +86,7 @@ protected:
 signals:
     void scanStarted();
     void scanFinished();
+    void currentFileType(qint32 nFT);
     void showInfo();
 
 private:

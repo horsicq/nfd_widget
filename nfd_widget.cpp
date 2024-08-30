@@ -137,6 +137,7 @@ void NFD_Widget::scan()
             g_pSpecAbstract.setData(sFileName, &g_scanOptions, &g_scanResult, &g_pdStruct);
             g_pSpecAbstract.process();
 
+            emit currentFileType(g_scanResult.ftInit);
             emit scanFinished();
         }
     }
