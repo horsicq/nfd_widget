@@ -28,7 +28,7 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 
     g_pdStruct = XBinary::createPdStruct();
 
-    connect(&watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
+    connect(&g_watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
 
     g_pTimer = new QTimer(this);
     connect(g_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
@@ -42,7 +42,7 @@ NFD_Widget::~NFD_Widget()
 {
     if (g_bProcess) {
         stop();
-        watcher.waitForFinished();
+        g_watcher.waitForFinished();
     }
 
     delete ui;
@@ -52,7 +52,7 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
 {
     clear();
 
-    this->sFileName = sFileName;
+    this->g_sFileName = sFileName;
     this->g_fileType = fileType;
     g_scanType = ST_FILE;
 
@@ -116,11 +116,11 @@ void NFD_Widget::process()
         QFuture<void> future = QtConcurrent::run(this, &NFD_Widget::scan);
 #endif
 
-        watcher.setFuture(future);
+        g_watcher.setFuture(future);
     } else {
         ui->pushButtonNfdScanStart->setEnabled(false);
         stop();
-        watcher.waitForFinished();
+        g_watcher.waitForFinished();
         ui->pushButtonNfdScanStart->setText(tr("Scan"));
         enableControls(true);
     }
@@ -134,7 +134,7 @@ void NFD_Widget::scan()
 
             g_pdStruct = XBinary::createPdStruct();
 
-            g_pSpecAbstract.setData(sFileName, &g_scanOptions, &g_scanResult, &g_pdStruct);
+            g_pSpecAbstract.setData(g_sFileName, &g_scanOptions, &g_scanResult, &g_pdStruct);
             g_pSpecAbstract.process();
 
             emit currentFileType(g_scanResult.ftInit);
@@ -208,7 +208,7 @@ void NFD_Widget::enableControls(bool bState)
 
 void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
 {
-    DialogNFDScanDirectory dds(this, QFileInfo(sFileName).absolutePath());
+    DialogNFDScanDirectory dds(this, QFileInfo(g_sFileName).absolutePath());
     dds.setGlobal(getShortcuts(), getGlobalOptions());
     dds.exec();
 }
@@ -223,7 +223,7 @@ void NFD_Widget::on_pushButtonNfdInfo_clicked()
     if (!g_scanOptions.bHandleInfo) {
         DialogNFDWidgetAdvanced dnwa(this);
         dnwa.setGlobal(getShortcuts(), getGlobalOptions());
-        dnwa.setData(sFileName, g_scanOptions, true);
+        dnwa.setData(g_sFileName, g_scanOptions, true);
 
         dnwa.exec();
     } else {

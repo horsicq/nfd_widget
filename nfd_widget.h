@@ -95,8 +95,8 @@ private:
     SpecAbstract g_pSpecAbstract;
     XScanEngine::SCAN_OPTIONS g_scanOptions;
     XScanEngine::SCAN_RESULT g_scanResult;
-    QFutureWatcher<void> watcher;
-    QString sFileName;
+    QFutureWatcher<void> g_watcher;
+    QString g_sFileName;
     XBinary::FT g_fileType;
     XBinary::PDSTRUCT g_pdStruct;
     QTimer *g_pTimer;
