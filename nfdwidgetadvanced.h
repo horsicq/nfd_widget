@@ -43,8 +43,8 @@ public:
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
 
 private slots:
-    void on_pushButtonScan_clicked();
-    void on_pushButtonSave_clicked();
+    void on_toolButtonScan_clicked();
+    void on_toolButtonSave_clicked();
     void on_comboBoxType_currentIndexChanged(int nIndex);
     void process();
 

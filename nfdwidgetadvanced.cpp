@@ -26,6 +26,16 @@ NFDWidgetAdvanced::NFDWidgetAdvanced(QWidget *pParent) : XShortcutsWidget(pParen
 {
     ui->setupUi(this);
 
+    XOptions::adjustToolButton(ui->toolButtonScan, XOptions::ICONTYPE_SCAN);
+    XOptions::adjustToolButton(ui->toolButtonSave, XOptions::ICONTYPE_SAVE);
+
+    ui->comboBoxType->setToolTip(tr("Type"));
+    ui->comboBoxFlags->setToolTip(tr("Flags"));
+    ui->treeViewScan->setToolTip(tr("Scan"));
+    ui->tableViewHeur->setToolTip(tr("Heuristics"));
+    ui->toolButtonSave->setToolTip(tr("Save"));
+    ui->toolButtonScan->setToolTip(tr("Scan"));
+
     this->g_pDevice = nullptr;
     this->g_fileType = XBinary::FT_UNKNOWN;
 
@@ -75,7 +85,7 @@ void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
-void NFDWidgetAdvanced::on_pushButtonScan_clicked()
+void NFDWidgetAdvanced::on_toolButtonScan_clicked()
 {
     process();
 }
@@ -85,7 +95,7 @@ void NFDWidgetAdvanced::registerShortcuts(bool bState)
     Q_UNUSED(bState)
 }
 
-void NFDWidgetAdvanced::on_pushButtonSave_clicked()
+void NFDWidgetAdvanced::on_toolButtonSave_clicked()
 {
     QAbstractItemModel *pModel = ui->treeViewScan->model();
 
