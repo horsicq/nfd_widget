@@ -156,8 +156,6 @@ void NFDWidgetAdvanced::process()
 
     qint32 nNumberOfHeurs = scanResult.listDebugRecords.count();
 
-    QAbstractItemModel *pOldTableModel = ui->tableViewHeur->model();
-
     QStandardItemModel *pHeurModel = new QStandardItemModel(nNumberOfHeurs, 3, this);
 
     pHeurModel->setHeaderData(0, Qt::Horizontal, tr("Type"));
@@ -178,11 +176,10 @@ void NFDWidgetAdvanced::process()
         pHeurModel->setItem(i, 2, pItemValue);
     }
 
-    ui->tableViewHeur->setModel(pHeurModel);
+    ui->tableViewHeur->setCustomModel(pHeurModel, true);
 
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Interactive);
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Interactive);
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
 
-    deleteOldAbstractModel(&pOldTableModel);
 }
