@@ -181,5 +181,4 @@ void NFDWidgetAdvanced::process()
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Interactive);
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Interactive);
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-
 }
