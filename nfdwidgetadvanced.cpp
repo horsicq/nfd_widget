@@ -131,6 +131,7 @@ void NFDWidgetAdvanced::process()
     scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
     scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
     scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
+    scanOptions.bHideUnknown = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIDEUNKNOWN).toBool();
     scanOptions.bIsSort = getGlobalOptions()->getValue(XOptions::ID_SCAN_SORT).toBool();
 
     quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
