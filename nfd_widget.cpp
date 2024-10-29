@@ -36,6 +36,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
     ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 
     clear();
+
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(0).arg(tr("msec"))); // TODO Function
 }
 
 NFD_Widget::~NFD_Widget()
