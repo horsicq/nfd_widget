@@ -37,7 +37,7 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 
     clear();
 
-    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(0).arg(tr("msec"))); // TODO Function
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(0).arg(tr("msec")));  // TODO Function
 }
 
 NFD_Widget::~NFD_Widget()
