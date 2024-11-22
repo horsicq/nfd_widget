@@ -85,6 +85,13 @@ void NFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions)
     XShortcutsWidget::setGlobal(pShortcuts, pXOptions);
 }
 
+void NFDWidgetAdvanced::reloadData(bool bSaveSelection)
+{
+    Q_UNUSED(bSaveSelection)
+
+    process();
+}
+
 void NFDWidgetAdvanced::on_toolButtonScan_clicked()
 {
     process();

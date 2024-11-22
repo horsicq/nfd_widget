@@ -41,6 +41,7 @@ public:
 
     virtual void adjustView();
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
+    void reloadData(bool bSaveSelection);
 
 private slots:
     void on_toolButtonScan_clicked();
