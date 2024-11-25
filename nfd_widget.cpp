@@ -74,6 +74,12 @@ void NFD_Widget::adjustView()
     ui->comboBoxFlags->setValue(nFlags);
 }
 
+void NFD_Widget::reloadData(bool bSaveSelection)
+{
+    Q_UNUSED(bSaveSelection)
+    process();
+}
+
 void NFD_Widget::clear()
 {
     g_scanType = ST_UNKNOWN;

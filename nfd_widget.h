@@ -65,6 +65,7 @@ public:
     void setData(const QString &sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
     void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
     virtual void adjustView();
+    virtual void reloadData(bool bSaveSelection);
 
 private slots:
     void clear();
