@@ -1,5 +1,9 @@
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
+if (NOT DEFINED XDIALOGPROCESS_SOURCES)
+    include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/xdialogprocess.cmake)
+    set(NFD_WIDGET_SOURCES ${NFD_WIDGET_SOURCES} ${XDIALOGPROCESS_SOURCES})
+endif()
 include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/dialogtextinfo.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/xdialogprocess.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../XShortcuts/xshortcuts.cmake)
@@ -7,8 +11,9 @@ include(${CMAKE_CURRENT_LIST_DIR}/../SpecAbstract/specabstract.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../Controls/xcomboboxex.cmake)
 
 set(NFD_WIDGET_SOURCES
-    ${DIALOGTEXTINFO_SOURCES}
+    ${NFD_WIDGET_SOURCES}
     ${XDIALOGPROCESS_SOURCES}
+    ${DIALOGTEXTINFO_SOURCES}
     ${XSHORTCUTS_SOURCES}
     ${SPECABSTRACT_SOURCES}
     ${XCOMBOBOXEX_SOURCES}
