@@ -12,8 +12,11 @@ if (NOT DEFINED XDIALOGPROCESS_SOURCES)
     include(${CMAKE_CURRENT_LIST_DIR}/../FormatDialogs/xdialogprocess.cmake)
     set(NFD_WIDGET_SOURCES ${NFD_WIDGET_SOURCES} ${XDIALOGPROCESS_SOURCES})
 endif()
+if (NOT DEFINED XSHORTCUTS_SOURCES)
+    include(${CMAKE_CURRENT_LIST_DIR}/../XShortcuts/xshortcuts.cmake)
+    set(NFD_WIDGET_SOURCES ${NFD_WIDGET_SOURCES} ${XSHORTCUTS_SOURCES})
+endif()
 
-include(${CMAKE_CURRENT_LIST_DIR}/../XShortcuts/xshortcuts.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../SpecAbstract/specabstract.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../Controls/xcomboboxex.cmake)
 
