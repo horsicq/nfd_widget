@@ -20,8 +20,10 @@ if (NOT DEFINED SPECABSTRACT_SOURCES)
     include(${CMAKE_CURRENT_LIST_DIR}/../SpecAbstract/specabstract.cmake)
     set(NFD_WIDGET_SOURCES ${NFD_WIDGET_SOURCES} ${SPECABSTRACT_SOURCES})
 endif()
-
-include(${CMAKE_CURRENT_LIST_DIR}/../Controls/xcomboboxex.cmake)
+if (NOT DEFINED XCOMBOBOXEX_SOURCES)
+    include(${CMAKE_CURRENT_LIST_DIR}/../Controls/xcomboboxex.cmake)
+    set(NFD_WIDGET_SOURCES ${NFD_WIDGET_SOURCES} ${XCOMBOBOXEX_SOURCES})
+endif()
 
 set(NFD_WIDGET_SOURCES
     ${NFD_WIDGET_SOURCES}
