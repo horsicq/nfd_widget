@@ -39,6 +39,8 @@ void DialogNFDWidgetAdvanced::setGlobal(XShortcuts *pShortcuts, XOptions *pXOpti
 
 void DialogNFDWidgetAdvanced::adjustView()
 {
+    getGlobalOptions()->adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
+    ui->widgetScan->adjustView();
 }
 
 void DialogNFDWidgetAdvanced::setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan)

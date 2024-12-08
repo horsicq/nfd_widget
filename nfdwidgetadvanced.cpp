@@ -73,6 +73,7 @@ void NFDWidgetAdvanced::setData(const QString &sFileName, const XScanEngine::SCA
 
 void NFDWidgetAdvanced::adjustView()
 {
+    getGlobalOptions()->adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
     getGlobalOptions()->adjustTreeView(ui->treeViewScan, XOptions::ID_VIEW_FONT_TREEVIEWS);
     getGlobalOptions()->adjustTableView(ui->tableViewHeur, XOptions::ID_VIEW_FONT_TABLEVIEWS);
 
