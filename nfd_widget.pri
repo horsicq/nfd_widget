@@ -51,7 +51,12 @@ FORMS += \
 
 !contains(XCONFIG, xcomboboxex) {
     XCONFIG += xcomboboxex
-    include(../../_mylibs/Controls/xcomboboxex.pri)
+    include($$PWD/../Controls/xcomboboxex.pri)
+}
+
+!contains(XCONFIG, xtableview) {
+    XCONFIG += xtableview
+    include($$PWD/../Controls/xtableview.pri)
 }
 
 DISTFILES += \
