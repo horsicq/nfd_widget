@@ -191,3 +191,14 @@ void NFDWidgetAdvanced::process()
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Interactive);
     ui->tableViewHeur->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
 }
+
+void NFDWidgetAdvanced::on_tableViewHeur_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu contextMenu(this);  // TODO
+    QMenu menuCopy(this);
+
+    getShortcuts()->adjustRowCopyMenu(&contextMenu, &menuCopy, ui->tableViewHeur);
+
+    contextMenu.exec(ui->tableViewHeur->viewport()->mapToGlobal(pos));
+}
+

@@ -48,6 +48,7 @@ private slots:
     void on_toolButtonSave_clicked();
     void on_comboBoxType_currentIndexChanged(int nIndex);
     void process();
+    void on_tableViewHeur_customContextMenuRequested(const QPoint &pos);
 
 protected:
     virtual void registerShortcuts(bool bState);
