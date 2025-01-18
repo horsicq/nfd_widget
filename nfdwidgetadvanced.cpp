@@ -201,4 +201,3 @@ void NFDWidgetAdvanced::on_tableViewHeur_customContextMenuRequested(const QPoint
 
     contextMenu.exec(ui->tableViewHeur->viewport()->mapToGlobal(pos));
 }
-
