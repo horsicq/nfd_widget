@@ -76,6 +76,7 @@ void NFDWidgetAdvanced::adjustView()
     getGlobalOptions()->adjustWidget(this, XOptions::ID_VIEW_FONT_CONTROLS);
     getGlobalOptions()->adjustTreeView(ui->treeViewScan, XOptions::ID_VIEW_FONT_TREEVIEWS);
     getGlobalOptions()->adjustTableView(ui->tableViewHeur, XOptions::ID_VIEW_FONT_TABLEVIEWS);
+    ui->tableViewHeur->adjust();
 
     quint64 nFlags = XScanEngine::getScanFlagsFromGlobalOptions(getGlobalOptions());
     ui->comboBoxFlags->setValue(nFlags);
