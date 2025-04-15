@@ -56,6 +56,7 @@ void NFDOptionsWidget::save()
     g_pOptions->getCheckBox(ui->checkBoxHeuristicScan, XOptions::ID_SCAN_FLAG_HEURISTIC);
     g_pOptions->getCheckBox(ui->checkBoxVerbose, XOptions::ID_SCAN_FLAG_VERBOSE);
     g_pOptions->getCheckBox(ui->checkBoxAllTypesScan, XOptions::ID_SCAN_FLAG_ALLTYPES);
+    g_pOptions->getCheckBox(ui->checkBoxFormatResult, XOptions::ID_SCAN_FORMATRESULT);
     g_pOptions->getCheckBox(ui->checkBoxHighlight, XOptions::ID_SCAN_HIGHLIGHT);
     g_pOptions->getComboBox(ui->comboBoxBufferSize, XOptions::ID_SCAN_BUFFERSIZE);
 }
@@ -68,6 +69,7 @@ void NFDOptionsWidget::setDefaultValues(XOptions *pOptions)
     pOptions->addID(XOptions::ID_SCAN_FLAG_HEURISTIC, false);
     pOptions->addID(XOptions::ID_SCAN_FLAG_VERBOSE, false);
     pOptions->addID(XOptions::ID_SCAN_FLAG_ALLTYPES, false);
+    pOptions->addID(XOptions::ID_SCAN_FORMATRESULT, true);
     pOptions->addID(XOptions::ID_SCAN_HIGHLIGHT, true);
     pOptions->addID(XOptions::ID_SCAN_SORT, true);
     pOptions->addID(XOptions::ID_SCAN_BUFFERSIZE, 2 * 1024 * 1024);
@@ -81,6 +83,7 @@ void NFDOptionsWidget::reload()
     g_pOptions->setCheckBox(ui->checkBoxHeuristicScan, XOptions::ID_SCAN_FLAG_HEURISTIC);
     g_pOptions->setCheckBox(ui->checkBoxVerbose, XOptions::ID_SCAN_FLAG_VERBOSE);
     g_pOptions->setCheckBox(ui->checkBoxAllTypesScan, XOptions::ID_SCAN_FLAG_ALLTYPES);
+    g_pOptions->setCheckBox(ui->checkBoxFormatResult, XOptions::ID_SCAN_FORMATRESULT);
     g_pOptions->setCheckBox(ui->checkBoxHighlight, XOptions::ID_SCAN_HIGHLIGHT);
     g_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_SCAN_BUFFERSIZE);
 }
