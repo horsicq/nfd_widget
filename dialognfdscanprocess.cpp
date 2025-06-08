@@ -27,7 +27,7 @@ DialogNFDScanProcess::DialogNFDScanProcess(QWidget *pParent) : XDialogProcess(pP
 
     g_pSpecAbstract->moveToThread(g_pThread);
 
-    connect(g_pThread, SIGNAL(started()), g_pSpecAbstract, SLOT(process()));
+    connect(g_pThread, SIGNAL(started()), g_pSpecAbstract, SLOT(_process()));
     connect(g_pSpecAbstract, SIGNAL(completed(qint64)), this, SLOT(onCompleted(qint64)));
     connect(g_pSpecAbstract, SIGNAL(scanFileStarted(QString)), this, SIGNAL(scanFileStarted(QString)), Qt::DirectConnection);
     connect(g_pSpecAbstract, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
