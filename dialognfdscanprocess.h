@@ -41,7 +41,6 @@ public:
     void setData(const QString &sFileName, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult);
     void setData(QIODevice *pDevice, XScanEngine::SCAN_OPTIONS *pOptions, XScanEngine::SCAN_RESULT *pScanResult);
     void setData(const QString &sDirectoryName, XScanEngine::SCAN_OPTIONS *pOptions);
-    static bool saveResult(QWidget *pParent, ScanItemModel *pModel, const QString &sResultFileName);  // TODO move to scanitemmodel.h
 
 signals:
     void scanFileStarted(const QString &sFileName);

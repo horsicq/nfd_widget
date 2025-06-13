@@ -106,18 +106,14 @@ void NFDWidgetAdvanced::registerShortcuts(bool bState)
 
 void NFDWidgetAdvanced::on_toolButtonSave_clicked()
 {
-    QAbstractItemModel *pModel = ui->treeViewScan->model();
+    QString sSaveFileName = XBinary::getResultFileName(g_pDevice, QString("%1.txt").arg(QString("NFD")));
 
-    if (pModel) {
-        QString sSaveFileName;
+    QString _sFileName = QFileDialog::getSaveFileName(this, tr("Save"), sSaveFileName, QString("%1 (*.txt);;%2 (*)").arg(tr("Text files"), tr("All files")));
 
-        if (g_pDevice) {
-            sSaveFileName = XBinary::getResultFileName(g_pDevice, QString("%1.txt").arg(tr("Result")));
-        } else {
-            sSaveFileName = XBinary::getResultFileName(g_sFileName, QString("%1.txt").arg(tr("Result")));
+    if (!_sFileName.isEmpty()) {
+        if (!XOptions::saveTreeView(ui->treeViewScan, sSaveFileName)) {
+            QMessageBox::critical(XOptions::getMainWidget(this), tr("Error"), QString("%1: %2").arg(tr("Cannot save file"), _sFileName));
         }
-
-        DialogNFDScanProcess::saveResult(this, (ScanItemModel *)pModel, sSaveFileName);
     }
 }
 

@@ -63,28 +63,3 @@ DialogNFDScanProcess::~DialogNFDScanProcess()
     delete g_pSpecAbstract;
 }
 
-bool DialogNFDScanProcess::saveResult(QWidget *pParent, ScanItemModel *pModel, const QString &sResultFileName)
-{
-    bool bResult = false;
-
-    if (pModel) {
-        QString sFilter = QString("%1 (*.txt)").arg(tr("Text documents"));
-        QString sFileName = QFileDialog::getSaveFileName(pParent, tr("Save result"), sResultFileName, sFilter);
-
-        if (!sFileName.isEmpty()) {
-            QFile file;
-            file.setFileName(sFileName);
-
-            if (file.open(QIODevice::ReadWrite)) {
-                QString sText = pModel->toFormattedString();
-
-                file.write(sText.toUtf8().data());
-                file.close();
-
-                bResult = true;
-            }
-        }
-    }
-
-    return bResult;
-}
