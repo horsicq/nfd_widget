@@ -6,7 +6,6 @@ DEPENDPATH += $$PWD
 HEADERS += \
     $$PWD/dialognfdscan.h \
     $$PWD/dialognfdscandirectory.h \
-    $$PWD/dialognfdscanprocess.h \
     $$PWD/dialognfdwidgetadvanced.h \
     $$PWD/nfd_widget.h \
     $$PWD/nfdoptionswidget.h \
@@ -15,7 +14,6 @@ HEADERS += \
 SOURCES += \
     $$PWD/dialognfdscan.cpp \
     $$PWD/dialognfdscandirectory.cpp \
-    $$PWD/dialognfdscanprocess.cpp \
     $$PWD/dialognfdwidgetadvanced.cpp \
     $$PWD/nfd_widget.cpp \
     $$PWD/nfdoptionswidget.cpp \

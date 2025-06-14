@@ -37,8 +37,6 @@ set(NFD_WIDGET_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscandirectory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscandirectory.h
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdscandirectory.ui
-    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscanprocess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/dialognfdscanprocess.h
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdwidgetadvanced.cpp
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdwidgetadvanced.h
     ${CMAKE_CURRENT_LIST_DIR}/dialognfdwidgetadvanced.ui

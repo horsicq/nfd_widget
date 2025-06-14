@@ -142,15 +142,18 @@ void NFDWidgetAdvanced::process()
     quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
     XScanEngine::setScanFlags(&scanOptions, nFlags);
 
-    DialogNFDScanProcess dialogStaticScanProcess(this);
-    dialogStaticScanProcess.setGlobal(getShortcuts(), getGlobalOptions());
+    SpecAbstract specAbstract;
+    XDialogProcess ds(this, &specAbstract);
+    ds.setGlobal(getShortcuts(), getGlobalOptions());
+
     if (g_pDevice) {
-        dialogStaticScanProcess.setData(g_pDevice, &scanOptions, &scanResult);
+        specAbstract.setData(g_pDevice, &scanOptions, &scanResult, ds.getPdStruct());
     } else {
-        dialogStaticScanProcess.setData(g_sFileName, &scanOptions, &scanResult);
+        specAbstract.setData(g_sFileName, &scanOptions, &scanResult, ds.getPdStruct());
     }
 
-    dialogStaticScanProcess.showDialogDelay();
+    ds.start();
+    ds.showDialogDelay();
 
     QAbstractItemModel *pOldTreeModel = ui->treeViewScan->model();
 

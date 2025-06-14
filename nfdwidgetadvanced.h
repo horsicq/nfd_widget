@@ -21,8 +21,10 @@
 #ifndef NFDWIDGETADVANCED_H
 #define NFDWIDGETADVANCED_H
 
-#include "dialognfdscanprocess.h"
+#include "specabstract.h"
+#include "xdialogprocess.h"
 #include "xshortcutswidget.h"
+#include "scanitemmodel.h"
 
 namespace Ui {
 class NFDWidgetAdvanced;

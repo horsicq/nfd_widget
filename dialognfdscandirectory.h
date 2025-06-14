@@ -24,10 +24,12 @@
 #include <QDialog>
 #include <QFileDialog>
 
-#include "dialognfdscanprocess.h"
+#include "specabstract.h"
+#include "xdialogprocess.h"
 #include "xoptions.h"
 #include "xshortcutsdialog.h"
 #include "dialogtextinfo.h"
+#include "scanitemmodel.h"
 
 namespace Ui {
 class DialogNFDScanDirectory;

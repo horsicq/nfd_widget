@@ -88,10 +88,13 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
         // TODO Filter options
         // |flags|x all|
 
-        DialogNFDScanProcess ds(this);
+        SpecAbstract specAbstract;
+        connect(&specAbstract, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SLOT(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
+
+        XDialogProcess ds(this, &specAbstract);
         ds.setGlobal(getShortcuts(), getGlobalOptions());
-        connect(&ds, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SLOT(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
-        ds.setData(sDirectoryName, &g_scanOptions);
+        specAbstract.setData(sDirectoryName, &g_scanOptions, ds.getPdStruct());
+        ds.start();
         ds.showDialogDelay();
     }
 }

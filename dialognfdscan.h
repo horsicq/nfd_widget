@@ -22,7 +22,7 @@
 #define DIALOGNFDSCAN_H
 
 #include "xshortcutsdialog.h"
-#include "dialognfdscanprocess.h"
+#include "xbinary.h"
 #include "xoptions.h"
 
 namespace Ui {
