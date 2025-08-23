@@ -99,14 +99,16 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
     }
 }
 
-void DialogNFDScanDirectory::scanResult(XScanEngine::SCAN_RESULT scanResult)
+void DialogNFDScanDirectory::scanResult(const XScanEngine::SCAN_RESULT &scanResult)
 {
     QString sResult = QString("%1 %2 %3").arg(QDir().toNativeSeparators(scanResult.sFileName), QString::number(scanResult.nScanTime), tr("msec"));
     sResult += "\r\n";  // TODO Linux
 
     ScanItemModel model(&g_scanOptions, &(scanResult.listRecords), 1);
 
-    sResult += model.toString(XBinary::FORMATTYPE_TEXT).toUtf8().data();
+    QString sScanResult = model.toString(XBinary::FORMATTYPE_PLAINTEXT).toUtf8().data();
+
+    sResult += sScanResult;
 
     emit resultSignal(sResult);
 }
