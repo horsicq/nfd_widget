@@ -30,8 +30,8 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 
     connect(&g_watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
 
-    g_pTimer = new QTimer(this);
-    connect(g_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    m_pTimer = new QTimer(this);
+    connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
 
     ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 
@@ -111,7 +111,7 @@ void NFD_Widget::process()
 
         XScanEngine::setScanFlagsToGlobalOptions(getGlobalOptions(), nFlags);
 
-        g_pTimer->start(200);  // TODO const
+        m_pTimer->start(200);  // TODO const
 
         ui->progressBar0->hide();
         ui->progressBar1->hide();
@@ -164,7 +164,7 @@ void NFD_Widget::on_scanFinished()
 {
     enableControls(true);
 
-    g_pTimer->stop();
+    m_pTimer->stop();
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 

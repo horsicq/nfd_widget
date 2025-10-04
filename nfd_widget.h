@@ -100,7 +100,7 @@ private:
     QString g_sFileName;
     XBinary::FT g_fileType;
     XBinary::PDSTRUCT g_pdStruct;
-    QTimer *g_pTimer;
+    QTimer *m_pTimer;
     bool g_bProcess;
 };
 
