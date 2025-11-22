@@ -34,7 +34,7 @@ DialogNFDScanDirectory::DialogNFDScanDirectory(QWidget *pParent, const QString &
         ui->lineEditDirectoryName->setText(sDirName);
     }
 
-    g_scanOptions = {};
+    m_scanOptions = {};
 
     ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 }
@@ -75,14 +75,14 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
     if (sDirectoryName != "") {
         ui->textBrowserResult->clear();
 
-        g_scanOptions.bShowType = true;
-        g_scanOptions.bShowVersion = true;
-        g_scanOptions.bShowInfo = true;
-        g_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
-        g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        m_scanOptions.bShowType = true;
+        m_scanOptions.bShowVersion = true;
+        m_scanOptions.bShowInfo = true;
+        m_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
+        m_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
 
         quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
-        XScanEngine::setScanFlags(&g_scanOptions, nFlags);
+        XScanEngine::setScanFlags(&m_scanOptions, nFlags);
 
         XScanEngine::setScanFlagsToGlobalOptions(getGlobalOptions(), nFlags);
         // TODO Filter options
@@ -93,7 +93,7 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
 
         XDialogProcess ds(this, &specAbstract);
         ds.setGlobal(getShortcuts(), getGlobalOptions());
-        specAbstract.setData(sDirectoryName, &g_scanOptions, ds.getPdStruct());
+        specAbstract.setData(sDirectoryName, &m_scanOptions, ds.getPdStruct());
         ds.start();
         ds.showDialogDelay();
     }
@@ -104,7 +104,7 @@ void DialogNFDScanDirectory::scanResult(const XScanEngine::SCAN_RESULT &scanResu
     QString sResult = QString("%1 %2 %3").arg(QDir().toNativeSeparators(scanResult.sFileName), QString::number(scanResult.nScanTime), tr("msec"));
     sResult += "\r\n";  // TODO Linux
 
-    ScanItemModel model(&g_scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel model(&m_scanOptions, &(scanResult.listRecords), 1);
 
     QString sScanResult = model.toString(XBinary::FORMATTYPE_PLAINTEXT).toUtf8().data();
 
