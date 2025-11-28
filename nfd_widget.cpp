@@ -26,9 +26,9 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 {
     ui->setupUi(this);
 
-    g_pdStruct = XBinary::createPdStruct();
+    m_pdStruct = XBinary::createPdStruct();
 
-    connect(&g_watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
+    connect(&m_watcher, SIGNAL(finished()), this, SLOT(on_scanFinished()));
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
@@ -42,9 +42,9 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XShortcutsWidget(pParent), ui(new Ui:
 
 NFD_Widget::~NFD_Widget()
 {
-    if (g_bProcess) {
+    if (m_bProcess) {
         stop();
-        g_watcher.waitForFinished();
+        m_watcher.waitForFinished();
     }
 
     delete ui;
@@ -54,9 +54,9 @@ void NFD_Widget::setData(const QString &sFileName, bool bScan, XBinary::FT fileT
 {
     clear();
 
-    this->g_sFileName = sFileName;
-    this->g_fileType = fileType;
-    g_scanType = ST_FILE;
+    this->m_sFileName = sFileName;
+    this->m_fileType = fileType;
+    m_scanType = ST_FILE;
 
     if (bScan) {
         process();
@@ -82,32 +82,32 @@ void NFD_Widget::reloadData(bool bSaveSelection)
 
 void NFD_Widget::clear()
 {
-    g_scanType = ST_UNKNOWN;
-    g_bProcess = false;
-    g_scanOptions = {};
-    g_scanResult = {};
+    m_scanType = ST_UNKNOWN;
+    m_bProcess = false;
+    m_scanOptions = {};
+    m_scanResult = {};
 }
 
 void NFD_Widget::process()
 {
-    if (!g_bProcess) {
-        g_bProcess = true;
+    if (!m_bProcess) {
+        m_bProcess = true;
         enableControls(false);
 
         ui->pushButtonNfdScanStart->setText(tr("Stop"));
 
-        g_scanOptions.bShowType = true;
-        g_scanOptions.bShowVersion = true;
-        g_scanOptions.bShowInfo = true;
-        g_scanOptions.fileType = g_fileType;
-        g_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
-        g_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
-        g_scanOptions.bHideUnknown = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIDEUNKNOWN).toBool();
-        g_scanOptions.bIsSort = getGlobalOptions()->getValue(XOptions::ID_SCAN_SORT).toBool();
+        m_scanOptions.bShowType = true;
+        m_scanOptions.bShowVersion = true;
+        m_scanOptions.bShowInfo = true;
+        m_scanOptions.fileType = m_fileType;
+        m_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        m_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
+        m_scanOptions.bHideUnknown = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIDEUNKNOWN).toBool();
+        m_scanOptions.bIsSort = getGlobalOptions()->getValue(XOptions::ID_SCAN_SORT).toBool();
         //    scanOptions.bDebug=true;
 
         quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
-        XScanEngine::setScanFlags(&g_scanOptions, nFlags);
+        XScanEngine::setScanFlags(&m_scanOptions, nFlags);
 
         XScanEngine::setScanFlagsToGlobalOptions(getGlobalOptions(), nFlags);
 
@@ -125,11 +125,11 @@ void NFD_Widget::process()
         QFuture<void> future = QtConcurrent::run(this, &NFD_Widget::scan);
 #endif
 
-        g_watcher.setFuture(future);
+        m_watcher.setFuture(future);
     } else {
         ui->pushButtonNfdScanStart->setEnabled(false);
         stop();
-        g_watcher.waitForFinished();
+        m_watcher.waitForFinished();
         ui->pushButtonNfdScanStart->setText(tr("Scan"));
         enableControls(true);
     }
@@ -137,17 +137,17 @@ void NFD_Widget::process()
 
 void NFD_Widget::scan()
 {
-    if (g_scanType != ST_UNKNOWN) {
-        if (g_scanType == ST_FILE) {
+    if (m_scanType != ST_UNKNOWN) {
+        if (m_scanType == ST_FILE) {
             emit scanStarted();
 
-            g_pdStruct = XBinary::createPdStruct();
+            m_pdStruct = XBinary::createPdStruct();
 
-            g_pSpecAbstract.setData(g_sFileName, &g_scanOptions, &g_scanResult, &g_pdStruct);
-            g_pSpecAbstract.process();
+            m_pSpecAbstract.setData(m_sFileName, &m_scanOptions, &m_scanResult, &m_pdStruct);
+            m_pSpecAbstract.process();
 
-            if (g_scanResult.ftInit == XBinary::FT_COM) {
-                emit currentFileType(g_scanResult.ftInit);
+            if (m_scanResult.ftInit == XBinary::FT_COM) {
+                emit currentFileType(m_scanResult.ftInit);
             }
 
             emit scanFinished();
@@ -157,7 +157,7 @@ void NFD_Widget::scan()
 
 void NFD_Widget::stop()
 {
-    g_pdStruct.bIsStop = true;
+    m_pdStruct.bIsStop = true;
 }
 
 void NFD_Widget::on_scanFinished()
@@ -168,15 +168,15 @@ void NFD_Widget::on_scanFinished()
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-    ScanItemModel *pModel = new ScanItemModel(&g_scanOptions, &(g_scanResult.listRecords), 1);
+    ScanItemModel *pModel = new ScanItemModel(&m_scanOptions, &(m_scanResult.listRecords), 1);
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
     deleteOldAbstractModel(&pOldModel);
 
-    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(g_scanResult.nScanTime), tr("msec")));
+    ui->lineEditElapsedTime->setText(QString("%1 %2").arg(QString::number(m_scanResult.nScanTime), tr("msec")));
 
-    g_bProcess = false;
+    m_bProcess = false;
 
     ui->pushButtonNfdScanStart->setEnabled(true);
     ui->pushButtonNfdScanStart->setText(tr("Scan"));
@@ -220,7 +220,7 @@ void NFD_Widget::enableControls(bool bState)
 
 void NFD_Widget::on_pushButtonNfdDirectoryScan_clicked()
 {
-    DialogNFDScanDirectory dds(this, QFileInfo(g_sFileName).absolutePath());
+    DialogNFDScanDirectory dds(this, QFileInfo(m_sFileName).absolutePath());
     dds.setGlobal(getShortcuts(), getGlobalOptions());
     dds.exec();
 }
@@ -232,10 +232,10 @@ void NFD_Widget::registerShortcuts(bool bState)
 
 void NFD_Widget::on_pushButtonNfdInfo_clicked()
 {
-    if (!g_scanOptions.bHandleInfo) {
+    if (!m_scanOptions.bHandleInfo) {
         DialogNFDWidgetAdvanced dnwa(this);
         dnwa.setGlobal(getShortcuts(), getGlobalOptions());
-        dnwa.setData(g_sFileName, g_scanOptions, true);
+        dnwa.setData(m_sFileName, m_scanOptions, true);
 
         dnwa.exec();
     } else {
@@ -259,9 +259,9 @@ void NFD_Widget::on_pushButtonNfdScanStop_clicked()
 
 void NFD_Widget::timerSlot()
 {
-    XFormats::setProgressBar(ui->progressBar0, g_pdStruct._pdRecord[0]);
-    XFormats::setProgressBar(ui->progressBar1, g_pdStruct._pdRecord[1]);
-    XFormats::setProgressBar(ui->progressBar2, g_pdStruct._pdRecord[2]);
-    XFormats::setProgressBar(ui->progressBar3, g_pdStruct._pdRecord[3]);
-    XFormats::setProgressBar(ui->progressBar4, g_pdStruct._pdRecord[4]);
+    XFormats::setProgressBar(ui->progressBar0, m_pdStruct._pdRecord[0]);
+    XFormats::setProgressBar(ui->progressBar1, m_pdStruct._pdRecord[1]);
+    XFormats::setProgressBar(ui->progressBar2, m_pdStruct._pdRecord[2]);
+    XFormats::setProgressBar(ui->progressBar3, m_pdStruct._pdRecord[3]);
+    XFormats::setProgressBar(ui->progressBar4, m_pdStruct._pdRecord[4]);
 }

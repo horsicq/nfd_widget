@@ -92,16 +92,16 @@ signals:
 
 private:
     Ui::NFD_Widget *ui;
-    ST g_scanType;
-    SpecAbstract g_pSpecAbstract;
-    XScanEngine::SCAN_OPTIONS g_scanOptions;
-    XScanEngine::SCAN_RESULT g_scanResult;
-    QFutureWatcher<void> g_watcher;
-    QString g_sFileName;
-    XBinary::FT g_fileType;
-    XBinary::PDSTRUCT g_pdStruct;
+    ST m_scanType;
+    SpecAbstract m_pSpecAbstract;
+    XScanEngine::SCAN_OPTIONS m_scanOptions;
+    XScanEngine::SCAN_RESULT m_scanResult;
+    QFutureWatcher<void> m_watcher;
+    QString m_sFileName;
+    XBinary::FT m_fileType;
+    XBinary::PDSTRUCT m_pdStruct;
     QTimer *m_pTimer;
-    bool g_bProcess;
+    bool m_bProcess;
 };
 
 #endif  // NFD_WIDGET_H
