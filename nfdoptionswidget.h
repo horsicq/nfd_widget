@@ -49,7 +49,7 @@ protected:
 
 private:
     Ui::NFDOptionsWidget *ui;
-    XOptions *g_pOptions;
+    XOptions *m_pOptions;
 };
 
 #endif  // NFDOPTIONSWIDGET_H
