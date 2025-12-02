@@ -37,7 +37,7 @@ NFDWidgetAdvanced::NFDWidgetAdvanced(QWidget *pParent) : XShortcutsWidget(pParen
     ui->toolButtonScan->setToolTip(tr("Scan"));
 
     this->m_pDevice = nullptr;
-    this->g_fileType = XBinary::FT_UNKNOWN;
+    this->m_fileType = XBinary::FT_UNKNOWN;
 
     ui->comboBoxFlags->setData(XScanEngine::getScanFlags(), XComboBoxEx::CBTYPE_FLAGS, 0, tr("Flags"));
 }
@@ -50,7 +50,7 @@ NFDWidgetAdvanced::~NFDWidgetAdvanced()
 void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT fileType)
 {
     this->m_pDevice = pDevice;
-    this->g_fileType = fileType;
+    this->m_fileType = fileType;
 
     XFormats::setFileTypeComboBox(fileType, pDevice, ui->comboBoxType, XBinary::TL_OPTION_ALL);
 
@@ -61,8 +61,8 @@ void NFDWidgetAdvanced::setData(QIODevice *pDevice, bool bScan, XBinary::FT file
 
 void NFDWidgetAdvanced::setData(const QString &sFileName, const XScanEngine::SCAN_OPTIONS &scanOptions, bool bScan)
 {
-    this->g_sFileName = sFileName;
-    this->g_fileType = scanOptions.fileType;
+    this->m_sFileName = sFileName;
+    this->m_fileType = scanOptions.fileType;
 
     XFormats::setFileTypeComboBox(scanOptions.fileType, sFileName, ui->comboBoxType, XBinary::TL_OPTION_ALL);
 
@@ -149,7 +149,7 @@ void NFDWidgetAdvanced::process()
     if (m_pDevice) {
         specAbstract.setData(m_pDevice, &scanOptions, &scanResult, ds.getPdStruct());
     } else {
-        specAbstract.setData(g_sFileName, &scanOptions, &scanResult, ds.getPdStruct());
+        specAbstract.setData(m_sFileName, &scanOptions, &scanResult, ds.getPdStruct());
     }
 
     ds.start();

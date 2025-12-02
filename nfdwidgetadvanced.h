@@ -58,8 +58,8 @@ protected:
 private:
     Ui::NFDWidgetAdvanced *ui;
     QIODevice *m_pDevice;
-    QString g_sFileName;
-    XBinary::FT g_fileType;
+    QString m_sFileName;
+    XBinary::FT m_fileType;
 };
 
 #endif  // NFDWIDGETADVANCED_H
