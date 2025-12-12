@@ -79,7 +79,7 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
         m_scanOptions.bShowVersion = true;
         m_scanOptions.bShowInfo = true;
         m_scanOptions.bSubdirectories = ui->checkBoxScanSubdirectories->isChecked();
-        m_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_SCAN_BUFFERSIZE).toULongLong();
+        m_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_ENGINE_BUFFERSIZE).toULongLong();
 
         quint64 nFlags = ui->comboBoxFlags->getValue().toULongLong();
         XScanEngine::setScanFlags(&m_scanOptions, nFlags);

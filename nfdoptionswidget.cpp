@@ -58,7 +58,7 @@ void NFDOptionsWidget::save()
     m_pOptions->setCheckBox(ui->checkBoxAllTypesScan, XOptions::ID_SCAN_FLAG_ALLTYPES);
     m_pOptions->setCheckBox(ui->checkBoxFormatResult, XOptions::ID_SCAN_FORMATRESULT);
     m_pOptions->setCheckBox(ui->checkBoxHighlight, XOptions::ID_SCAN_HIGHLIGHT);
-    m_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_SCAN_BUFFERSIZE);
+    m_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_ENGINE_BUFFERSIZE);
 }
 
 void NFDOptionsWidget::setDefaultValues(XOptions *pOptions)
@@ -72,7 +72,7 @@ void NFDOptionsWidget::setDefaultValues(XOptions *pOptions)
     pOptions->addID(XOptions::ID_SCAN_FORMATRESULT, true);
     pOptions->addID(XOptions::ID_SCAN_HIGHLIGHT, true);
     pOptions->addID(XOptions::ID_SCAN_SORT, true);
-    pOptions->addID(XOptions::ID_SCAN_BUFFERSIZE, 2 * 1024 * 1024);
+    pOptions->addID(XOptions::ID_ENGINE_BUFFERSIZE, 2 * 1024 * 1024);
 }
 
 void NFDOptionsWidget::reload()
@@ -85,7 +85,7 @@ void NFDOptionsWidget::reload()
     m_pOptions->setCheckBox(ui->checkBoxAllTypesScan, XOptions::ID_SCAN_FLAG_ALLTYPES);
     m_pOptions->setCheckBox(ui->checkBoxFormatResult, XOptions::ID_SCAN_FORMATRESULT);
     m_pOptions->setCheckBox(ui->checkBoxHighlight, XOptions::ID_SCAN_HIGHLIGHT);
-    m_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_SCAN_BUFFERSIZE);
+    m_pOptions->setComboBox(ui->comboBoxBufferSize, XOptions::ID_ENGINE_BUFFERSIZE);
 }
 
 void NFDOptionsWidget::registerShortcuts(bool bState)
