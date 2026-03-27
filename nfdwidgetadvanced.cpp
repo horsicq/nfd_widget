@@ -134,8 +134,6 @@ void NFDWidgetAdvanced::process()
     scanOptions.bShowInfo = true;
     scanOptions.bShowInternalDetects = true;
     scanOptions.fileType = (XBinary::FT)(ui->comboBoxType->currentData().toInt());
-    scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_ENGINE_BUFFERSIZE).toULongLong();
-    scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
     scanOptions.bHideUnknown = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIDEUNKNOWN).toBool();
     scanOptions.bIsSort = getGlobalOptions()->getValue(XOptions::ID_SCAN_SORT).toBool();
 
@@ -157,7 +155,7 @@ void NFDWidgetAdvanced::process()
 
     QAbstractItemModel *pOldTreeModel = ui->treeViewScan->model();
 
-    ScanItemModel *pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1);
+    ScanItemModel *pModel = new ScanItemModel(&scanOptions, &(scanResult.listRecords), 1, getGlobalOptions());
     ui->treeViewScan->setModel(pModel);
     ui->treeViewScan->expandAll();
 

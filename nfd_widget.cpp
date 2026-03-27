@@ -100,8 +100,6 @@ void NFD_Widget::process()
         m_scanOptions.bShowVersion = true;
         m_scanOptions.bShowInfo = true;
         m_scanOptions.fileType = m_fileType;
-        m_scanOptions.nBufferSize = getGlobalOptions()->getValue(XOptions::ID_ENGINE_BUFFERSIZE).toULongLong();
-        m_scanOptions.bIsHighlight = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIGHLIGHT).toBool();
         m_scanOptions.bHideUnknown = getGlobalOptions()->getValue(XOptions::ID_SCAN_HIDEUNKNOWN).toBool();
         m_scanOptions.bIsSort = getGlobalOptions()->getValue(XOptions::ID_SCAN_SORT).toBool();
         //    scanOptions.bDebug=true;
@@ -168,7 +166,7 @@ void NFD_Widget::on_scanFinished()
 
     QAbstractItemModel *pOldModel = ui->treeViewResult->model();
 
-    ScanItemModel *pModel = new ScanItemModel(&m_scanOptions, &(m_scanResult.listRecords), 1);
+    ScanItemModel *pModel = new ScanItemModel(&m_scanOptions, &(m_scanResult.listRecords), 1, getGlobalOptions());
     ui->treeViewResult->setModel(pModel);
     ui->treeViewResult->expandAll();
 
