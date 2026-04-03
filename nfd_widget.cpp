@@ -141,8 +141,10 @@ void NFD_Widget::scan()
 
             m_pdStruct = XBinary::createPdStruct();
 
-            m_pSpecAbstract.setData(m_sFileName, &m_scanOptions, &m_scanResult, &m_pdStruct);
-            m_pSpecAbstract.process();
+            XScanEngineProcess scanEngineProcess(&m_pSpecAbstract);
+
+            scanEngineProcess.setData(m_sFileName, &m_scanOptions, &m_scanResult, &m_pdStruct);
+            scanEngineProcess.process();
 
             if (m_scanResult.ftInit == XBinary::FT_COM) {
                 emit currentFileType(m_scanResult.ftInit);

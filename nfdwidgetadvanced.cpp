@@ -141,13 +141,14 @@ void NFDWidgetAdvanced::process()
     XScanEngine::setScanFlags(&scanOptions, nFlags);
 
     SpecAbstract specAbstract;
-    XDialogProcess ds(this, &specAbstract);
+    XScanEngineProcess scanEngineProcess(&specAbstract);
+    XDialogProcess ds(this, &scanEngineProcess);
     ds.setGlobal(getShortcuts(), getGlobalOptions());
 
     if (m_pDevice) {
-        specAbstract.setData(m_pDevice, &scanOptions, &scanResult, ds.getPdStruct());
+        scanEngineProcess.setData(m_pDevice, &scanOptions, &scanResult, ds.getPdStruct());
     } else {
-        specAbstract.setData(m_sFileName, &scanOptions, &scanResult, ds.getPdStruct());
+        scanEngineProcess.setData(m_sFileName, &scanOptions, &scanResult, ds.getPdStruct());
     }
 
     ds.start();

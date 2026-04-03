@@ -90,9 +90,10 @@ void DialogNFDScanDirectory::scanDirectory(const QString &sDirectoryName)
         SpecAbstract specAbstract;
         connect(&specAbstract, SIGNAL(scanResult(const XScanEngine::SCAN_RESULT &)), this, SLOT(scanResult(const XScanEngine::SCAN_RESULT &)), Qt::DirectConnection);
 
-        XDialogProcess ds(this, &specAbstract);
+        XScanEngineProcess scanEngineProcess(&specAbstract);
+        XDialogProcess ds(this, &scanEngineProcess);
         ds.setGlobal(getShortcuts(), getGlobalOptions());
-        specAbstract.setData(sDirectoryName, &m_scanOptions, ds.getPdStruct());
+        scanEngineProcess.setData(sDirectoryName, &m_scanOptions, ds.getPdStruct());
         ds.start();
         ds.showDialogDelay();
     }
