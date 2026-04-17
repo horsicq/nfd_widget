@@ -21,87 +21,18 @@
 #ifndef NFD_WIDGET_H
 #define NFD_WIDGET_H
 
-#include <QFutureWatcher>
-#include <QWidget>
-#include <QtConcurrent>
+#include "xscanenginewidget.h"
+#include "specabstract.h"
 
-#include "dialognfdscandirectory.h"
-#include "dialogtextinfo.h"
-#include "scanitemmodel.h"
-#include "xshortcutswidget.h"
-#include "dialognfdwidgetadvanced.h"
-
-namespace Ui {
-class NFD_Widget;
-}
-
-class NFD_Widget : public XShortcutsWidget {
+class NFD_Widget : public XScanEngineWidget {
     Q_OBJECT
 
 public:
-    enum ST {
-        ST_UNKNOWN = 0,
-        ST_FILE
-    };
-
-    //    struct OPTIONS
-    //    {
-    //        bool bRecursiveScan;
-    //        bool bDeepScan;
-    //        bool bHeuristicScan;
-    //        bool bAllTypesScan;
-    //    };
-
-    enum COLUMN {
-        COLUMN_TYPE = 0,
-        COLUMN_STRING,
-        COLUMN_SIGNATURE,
-        COLUMN_INFO
-    };
-
     explicit NFD_Widget(QWidget *pParent = nullptr);
     ~NFD_Widget();
 
-    void setData(const QString &sFileName, bool bScan = false, XBinary::FT fileType = XBinary::FT_UNKNOWN);
-    void setGlobal(XShortcuts *pShortcuts, XOptions *pXOptions);
-    virtual void adjustView();
-    virtual void reloadData(bool bSaveSelection);
-
-private slots:
-    void clear();
-    void process();
-    void scan();
-    void stop();
-    void on_scanFinished();
-    void on_pushButtonNfdExtraInformation_clicked();
-    void enableControls(bool bState);
-    void on_pushButtonNfdDirectoryScan_clicked();
-    void on_pushButtonNfdInfo_clicked();
-    void on_pushButtonNfdScanStart_clicked();
-    void on_pushButtonNfdScanStop_clicked();
-    void timerSlot();
-
-protected:
-    virtual void registerShortcuts(bool bState);
-
-signals:
-    void scanStarted();
-    void scanFinished();
-    void currentFileType(qint32 nFT);
-    void showInfo();
-
 private:
-    Ui::NFD_Widget *ui;
-    ST m_scanType;
-    SpecAbstract m_pSpecAbstract;
-    XScanEngine::SCAN_OPTIONS m_scanOptions;
-    XScanEngine::SCAN_RESULT m_scanResult;
-    QFutureWatcher<void> m_watcher;
-    QString m_sFileName;
-    XBinary::FT m_fileType;
-    XBinary::PDSTRUCT m_pdStruct;
-    QTimer *m_pTimer;
-    bool m_bProcess;
+    SpecAbstract m_specAbstract;
 };
 
 #endif  // NFD_WIDGET_H
