@@ -27,5 +27,4 @@ NFD_Widget::NFD_Widget(QWidget *pParent) : XScanEngineWidget(pParent)
 
 NFD_Widget::~NFD_Widget()
 {
-
 }
